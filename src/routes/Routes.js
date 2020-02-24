@@ -4,8 +4,7 @@ import { connect } from "react-redux";
 import PrivateRoute from "./PrivateRoute";
 import { getURLParams, parseError } from "../utils/utils";
 
-import Home from "../screens/Home";
-import Header from "../components/Header/Header";
+import Dashboard from "../screens/Dashboard/Dashboard";
 
 const Routes = props => {
   const { user } = props;
@@ -66,15 +65,12 @@ const Routes = props => {
   }
 
   return (
-    <>
-      <Header {...props} />
-      <Switch>
-        <Route {...data} path="/" exact component={Home} />
-        {/* <Route {...data} path="/login" component={Login} />
+    <Switch>
+      <Route {...data} path="/" exact component={Dashboard} />
+      {/* <Route {...data} path="/login" component={Login} />
         <PrivateRoute {...data} path="/dashboard" component={Dashboard} /> */}
-        <Redirect to="/" />
-      </Switch>
-    </>
+      <Redirect to="/" />
+    </Switch>
   );
 };
 

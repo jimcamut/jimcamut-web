@@ -1,4 +1,10 @@
-export const updateList = (list, item) => {
+import _ from "lodash";
+
+export const addToList = (list, addTo, identifier = "id") => {
+  return _.uniq([...list, ...addTo], identifier);
+};
+
+export const updateListItem = (list, item) => {
   const idx = list.findIndex(it => it.objectId === item.objectId);
   let newList = Object.assign([], list);
   if (idx > -1) {
