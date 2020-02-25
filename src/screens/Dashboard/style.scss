@@ -8,7 +8,9 @@
 }
 
 .about-column {
-  width: 300px;
+  width: 50%;
+  min-width: 200px;
+  max-width: 400px;
   height: 100%;
   color: #fff;
   text-align: center;

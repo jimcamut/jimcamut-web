@@ -56,9 +56,21 @@
   fill: $blue2;
 }
 
-.portrait-logo {
-  .jim path,
-  .camut path {
-    fill: $blue1;
+a.logo-container {
+  .portrait-logo {
+    .jim,
+    .camut {
+      opacity: 0;
+      fill: $blue1;
+      transition: 0.3s ease;
+    }
+  }
+  &:hover {
+    .portrait-logo {
+      .jim,
+      .camut {
+        opacity: 1;
+      }
+    }
   }
 }
