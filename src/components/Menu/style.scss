@@ -1,7 +1,80 @@
 @import "../../assets/scss/colors.scss";
+// https://react-icons.netlify.com/#/search
 
 .menu {
   background: darken($app_background, 1%);
   height: 100%;
-  width: 100px;
+  width: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  .top,
+  .bottom {
+    width: 100%;
+  }
+}
+
+.logo-container {
+  margin: 15px auto;
+  display: block;
+  width: 56px;
+  height: 56px;
+}
+
+ul.sub-menu {
+  margin: 30px 0;
+  li {
+    color: #fff;
+    text-align: center;
+
+    a {
+      display: block;
+      border-left: 1px solid transparent;
+      padding: 20px 0;
+      transition: 0.3s ease;
+
+      &.active {
+        border-left-color: $blue3;
+      }
+      &:hover {
+        border-left-color: $blue2;
+      }
+    }
+    svg {
+      width: 24px;
+      height: 24px;
+      color: #fff;
+      margin-left: -1px;
+    }
+    a.active svg {
+      color: $blue2;
+    }
+    span {
+      display: none;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .bottom & {
+    li {
+      a {
+        padding: 12px 0;
+        &:hover {
+          svg {
+            opacity: 1;
+          }
+        }
+      }
+      svg {
+        width: 16px;
+        height: 16px;
+        opacity: 0.3;
+      }
+    }
+  }
 }

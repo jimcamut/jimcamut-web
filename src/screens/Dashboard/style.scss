@@ -1,0 +1,39 @@
+@import "../../assets/scss/colors.scss";
+
+.dashboard {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-column {
+  width: 300px;
+  height: 100%;
+  color: #fff;
+  text-align: center;
+
+  .container {
+    display: flex;
+    flex: 1;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 30px;
+    flex-direction: column;
+    background-color: rgba(255,255,255,0.01);
+  }
+
+  .circle {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid $blue3;
+
+    img {
+      width: 140px;
+      height: 140px;
+    }
+  }
+}

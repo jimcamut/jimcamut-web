@@ -5,6 +5,10 @@ import PrivateRoute from "./PrivateRoute";
 import { getURLParams, parseError } from "../utils/utils";
 
 import Dashboard from "../screens/Dashboard/Dashboard";
+import About from "../screens/About/About";
+import Strava from "../screens/Strava/Strava";
+import Grams from "../screens/Grams/Grams";
+import Tweets from "../screens/Tweets/Tweets";
 
 const Routes = props => {
   const { user } = props;
@@ -67,6 +71,10 @@ const Routes = props => {
   return (
     <Switch>
       <Route {...data} path="/" exact component={Dashboard} />
+      <Route {...data} path="/about" exact component={About} />
+      <Route {...data} path="/strava" exact component={Strava} />
+      <Route {...data} path="/grams" exact component={Grams} />
+      <Route {...data} path="/tweets" exact component={Tweets} />
       {/* <Route {...data} path="/login" component={Login} />
         <PrivateRoute {...data} path="/dashboard" component={Dashboard} /> */}
       <Redirect to="/" />

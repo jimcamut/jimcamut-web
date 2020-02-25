@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import "./style.scss";
 
-const Strava = () => {
+const Tweets = () => {
   const foo = "bar";
   return (
     <div className="dashboard">
-      <p>Strava</p>
+      <p>Tweets</p>
     </div>
   );
 };
 
-export default Strava;
+export default Tweets;
