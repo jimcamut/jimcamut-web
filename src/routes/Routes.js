@@ -15,7 +15,7 @@ const Routes = props => {
   const { id, sessionToken } = user || {};
 
   // Tracking GA
-  props.history.listen(location => console.log(location));
+  //props.history.listen(location => console.log(location.pathname));
 
   // Add "isAuthenticated" to props for PrivateRoute
   const isAuthenticated = !!sessionToken;

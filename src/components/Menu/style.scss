@@ -2,7 +2,7 @@
 // https://react-icons.netlify.com/#/search
 
 .menu {
-  background: darken($app_background, 1%);
+  background: $app_bg_dark;
   height: 100%;
   width: 80px;
   display: flex;
@@ -42,6 +42,47 @@ ul.sub-menu {
         border-left-color: $blue2;
       }
     }
+
+    &.strava {
+      a {
+        &.active {
+          border-left-color: $stravaOrange;
+          svg {
+            color: $stravaOrange;
+          }
+        }
+        &:hover {
+          border-left-color: $stravaOrange;
+        }
+      }
+    }
+    &.grams {
+      a {
+        &.active {
+          border-left-color: $instaPurple;
+          svg {
+            fill: url(#rg);
+          }
+        }
+        &:hover {
+          border-left-color: $instaPurple;
+        }
+      }
+    }
+    &.tweets {
+      a {
+        &.active {
+          border-left-color: $twitterBlue;
+          svg {
+            color: $twitterBlue;
+          }
+        }
+        &:hover {
+          border-left-color: $twitterBlue;
+        }
+      }
+    }
+
     svg {
       width: 24px;
       height: 24px;

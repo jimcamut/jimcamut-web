@@ -1,0 +1,13 @@
+.page-strava {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  .scroll-container {
+    overflow: auto;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+  }
+}

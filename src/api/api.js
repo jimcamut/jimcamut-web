@@ -4,16 +4,21 @@ import axios from "axios";
 
 const req = options => {
   return new Promise((resolve, reject) => {
-    const { method = "get", url } = options || {};
-    axios({ url, method })
+    options = options || {};
+    options.method = options.method || "get";
+    axios(options)
       .then(resolve)
       .catch(reject);
   });
 };
 
-export const fetchFeed = () => {
+export const fetchFeed = params => {
   return new Promise((resolve, reject) => {
-    req({ url: `${process.env.REACT_APP_API_URL}/strava` }).then(res => {
+    const { limit, after } = params || {};
+    req({
+      url: `${process.env.REACT_APP_API_URL}/strava`,
+      params: { limit, after }
+    }).then(res => {
       const { status, data } = res || {};
       if (status === 200) return resolve(data.result);
       reject(res.data);

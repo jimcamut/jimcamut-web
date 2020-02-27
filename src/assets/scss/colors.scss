@@ -1,7 +1,12 @@
-$app_background: #0f131a;
+$app_bg: #0f131a;
+$app_bg_dark: darken($app_bg, 1%);
 
 $blue1: rgb(0, 195, 255);
 $blue2: rgb(0, 132, 255);
 $blue3: rgb(0, 60, 255);
 
 $orange: orange;
+
+$stravaOrange: #fc5200;
+$twitterBlue: #00aced;
+$instaPurple: #d6249f; // fe4164 7f1734
