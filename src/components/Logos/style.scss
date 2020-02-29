@@ -1,0 +1,106 @@
+@import "../../assets/scss/colors.scss";
+@import "../../assets/scss/mixins.scss";
+
+@include keyframes(fillInColor) {
+  0% {
+    fill: $blue1;
+  }
+  25% {
+    fill: $blue2;
+  }
+  50% {
+    fill: $blue3;
+  }
+  75% {
+    fill: $blue2;
+  }
+  100% {
+    fill: $blue1;
+  }
+}
+
+@include keyframes(fillOutColor) {
+  0% {
+    fill: $blue3;
+  }
+  25% {
+    fill: $blue2;
+  }
+  50% {
+    fill: $blue1;
+  }
+  75% {
+    fill: $blue2;
+  }
+  100% {
+    fill: $blue3;
+  }
+}
+
+.logo-container {
+  .portrait-logo {
+    .jim,
+    .camut {
+      opacity: 0;
+      fill: $blue1;
+      transition: 0.3s ease;
+    }
+
+    .c-bottom,
+    .c-top {
+      fill: $blue3 !important;
+    }
+
+    .j-all {
+      fill: $blue1 !important;
+    }
+  }
+
+  &:hover {
+    .portrait-logo {
+      .jim,
+      .camut {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.logo-container.active {
+  .portrait-logo {
+    .c-bottom,
+    .c-top {
+      animation-name: fillOutColor;
+      animation-duration: 20s;
+      animation-iteration-count: infinite;
+      animation-play-state: running;
+      fill: $blue2;
+    }
+  }
+
+  .portrait-logo .j-all {
+    animation-name: fillInColor;
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+    fill: $blue2;
+  }
+}
+
+.logo-container:not(.active) {
+  .portrait-logo {
+    // path:not(.j-cutout) {
+    //   fill: #fff !important;
+    // }
+  }
+  .portrait-logo {
+    .c-bottom,
+    .c-top {
+      fill: $blue3 !important;
+    }
+
+    .j-all {
+      fill: $blue1 !important;
+    }
+  }
+}
