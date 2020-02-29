@@ -3,22 +3,7 @@ import "./style.scss";
 import moment from "moment-timezone";
 import CacheImage from "../CacheImage/CacheImage";
 import { MdDirectionsBike, MdDirectionsRun } from "react-icons/md";
-/**
- * TODOs:
- * 1) Generate image urls on the server https://stackoverflow.com/questions/35137936/can-i-let-node-js-generate-a-canvas-without-an-html-page
- */
-
-const cacheImages = true;
-
-const getImg = ({ poly, width = 600, height = 300 }) => {
-  //return "";
-  return (
-    "https://api.mapbox.com/styles/v1/mapbox/dark-v10/static/path-4+fc5200-0.75(" +
-    encodeURIComponent(poly) +
-    `)/auto/${width}x${height}@2x` +
-    `?access_token=${process.env.REACT_APP_MAPBOX}`
-  );
-};
+import { cacheImages, getGoogleImg, getStravaImg } from "./constants";
 
 const StravaCard = props => {
   const { name, type, map, start_date, distance, moving_time } =
@@ -40,7 +25,18 @@ const StravaCard = props => {
           .format("m:ss")
       : mph.toFixed(2);
 
-  const src = getImg({ poly: map.summary_polyline });
+  const src = getStravaImg({ poly: map.summary_polyline });
+
+  const imgId = src.substr(80, 20);
+
+  const onMapError = (src, id) => {
+    const isMapbox = src.match(/mapbox/gi);
+    let newUrl = "";
+    if (isMapbox) {
+      newUrl = getGoogleImg({ poly: map.summary_polyline });
+    }
+    document.getElementById(id).src = newUrl;
+  };
 
   return (
     <div className="strava-card" style={props.style || {}}>
@@ -90,15 +86,17 @@ const StravaCard = props => {
                 <CacheImage
                   alt={`Map of ${type}`}
                   src={src}
-                  id={src.substr(80, 20)}
+                  id={imgId}
                   className="map"
+                  onError={err => onMapError(src, imgId)}
                 />
               ) : (
                 <img
                   alt={`Map of ${type}`}
                   src={src}
-                  id={src.substr(80, 20)}
+                  id={imgId}
                   className="map"
+                  onError={err => onMapError(src, imgId)}
                 />
               )}
             </>

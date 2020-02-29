@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./style.scss";
 import LogoPortrait from "../Logos/LogoPortrait";
 import { FaGithub, FaStrava, FaInstagram, FaLinkedin } from "react-icons/fa";
@@ -37,7 +37,7 @@ const Menu = () => {
   return (
     <div className="menu">
       <div className="top">
-        <NavLink to="/" className="logo-container">
+        <NavLink exact to="/" className="logo-container">
           <LogoPortrait />
         </NavLink>
         <ul className="sub-menu">
@@ -62,13 +62,15 @@ const Menu = () => {
             label="Github"
             to="https://github.com/jimcamut"
             icon={<FaGithub />}
+            ext
           />
           <NavItem
             label="LinkedIn"
             to="https://www.linkedin.com/in/jimcamut"
             icon={<FaLinkedin />}
+            ext
           />
-          <NavItem label="Private" to="private-login" icon={<FiLock />} />
+          <NavItem exact label="Private" to="private-login" icon={<FiLock />} />
         </ul>
       </div>
     </div>

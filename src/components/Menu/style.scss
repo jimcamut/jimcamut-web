@@ -1,6 +1,8 @@
 @import "../../assets/scss/colors.scss";
 // https://react-icons.netlify.com/#/search
 
+$preHoverOpacity: 0.5;
+
 .menu {
   background: $app_bg_dark;
   height: 100%;
@@ -19,8 +21,8 @@
 .logo-container {
   margin: 15px auto;
   display: block;
-  width: 50px;
-  height: 50px;
+  width: 44px;
+  height: 44px;
 }
 
 ul.sub-menu {
@@ -35,6 +37,10 @@ ul.sub-menu {
       padding: 20px 0;
       transition: 0.3s ease;
 
+      svg {
+        transition: 0.3s ease;
+      }
+
       &.active {
         border-left-color: $blue3;
       }
@@ -43,43 +49,53 @@ ul.sub-menu {
       }
     }
 
+    &.about {
+      a {
+        &.active,
+        &:hover {
+          border-left-color: $blue2;
+          svg {
+            color: $blue2;
+          }
+        }
+        border-left-color: rgba($blue2, $preHoverOpacity);
+      }
+    }
+
     &.strava {
       a {
-        &.active {
+        &.active,
+        &:hover {
           border-left-color: $stravaOrange;
           svg {
             color: $stravaOrange;
           }
         }
-        &:hover {
-          border-left-color: $stravaOrange;
-        }
+        border-left-color: rgba($stravaOrange, $preHoverOpacity);
       }
     }
     &.grams {
       a {
-        &.active {
+        &.active,
+        &:hover {
           border-left-color: $instaPurple;
           svg {
             fill: url(#rg);
           }
         }
-        &:hover {
-          border-left-color: $instaPurple;
-        }
+        border-left-color: rgba($instaPurple, $preHoverOpacity);
       }
     }
     &.tweets {
       a {
-        &.active {
+        &.active,
+        &:hover {
           border-left-color: $twitterBlue;
           svg {
             color: $twitterBlue;
           }
         }
-        &:hover {
-          border-left-color: $twitterBlue;
-        }
+        border-left-color: rgba($twitterBlue, $preHoverOpacity);
       }
     }
 

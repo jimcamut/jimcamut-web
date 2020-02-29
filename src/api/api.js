@@ -25,3 +25,17 @@ export const fetchFeed = params => {
     });
   });
 };
+
+export const fetchGrams = params => {
+  return new Promise((resolve, reject) => {
+    const { limit, after } = params || {};
+    req({
+      url: `${process.env.REACT_APP_API_URL}/grams`,
+      params: { limit, after }
+    }).then(res => {
+      const { status, data } = res || {};
+      if (status === 200) return resolve(data.result);
+      reject(res.data);
+    });
+  });
+};

@@ -37,9 +37,48 @@
   }
 }
 
-.portrait-logo {
-  .c-bottom,
-  .c-top {
+.logo-container {
+  .portrait-logo {
+    .jim,
+    .camut {
+      opacity: 0;
+      fill: $blue1;
+      transition: 0.3s ease;
+    }
+
+    .c-bottom,
+    .c-top {
+      fill: $blue3 !important;
+    }
+
+    .j-all {
+      fill: $blue1 !important;
+    }
+  }
+
+  &:hover {
+    .portrait-logo {
+      .jim,
+      .camut {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.logo-container.active {
+  .portrait-logo {
+    .c-bottom,
+    .c-top {
+      animation-name: fillOutColor;
+      animation-duration: 20s;
+      animation-iteration-count: infinite;
+      animation-play-state: running;
+      fill: $blue2;
+    }
+  }
+
+  .portrait-logo .j-all {
     animation-name: fillInColor;
     animation-duration: 20s;
     animation-iteration-count: infinite;
@@ -48,29 +87,20 @@
   }
 }
 
-.portrait-logo .j-all {
-  animation-name: fillOutColor;
-  animation-duration: 20s;
-  animation-iteration-count: infinite;
-  animation-play-state: running;
-  fill: $blue2;
-}
-
-a.logo-container {
+.logo-container:not(.active) {
   .portrait-logo {
-    .jim,
-    .camut {
-      opacity: 0;
-      fill: $blue1;
-      transition: 0.3s ease;
-    }
+    // path:not(.j-cutout) {
+    //   fill: #fff !important;
+    // }
   }
-  &:hover {
-    .portrait-logo {
-      .jim,
-      .camut {
-        opacity: 1;
-      }
+  .portrait-logo {
+    .c-bottom,
+    .c-top {
+      fill: $blue3 !important;
+    }
+
+    .j-all {
+      fill: $blue1 !important;
     }
   }
 }
