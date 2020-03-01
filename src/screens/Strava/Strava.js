@@ -52,11 +52,7 @@ const Strava = props => {
   return (
     <div className="page-strava">
       {stateFeed.length !== 0 && (
-        <div
-          id="scroll-cont"
-          className="scroll-container"
-          style={{ height: "fetchLimit0%", width: "fetchLimit0%" }}
-        >
+        <div id="scroll-cont" className="scroll-container">
           <InfiniteScroll
             scrollableTarget="scroll-cont"
             dataLength={stateFeed.length} //This is important field to render the next data
