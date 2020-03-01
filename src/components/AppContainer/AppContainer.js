@@ -1,18 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import "./style.scss";
 import Routes from "../../routes/Routes";
 import Menu from "../Menu/Menu";
+import MobileHeader from "../MobileHeader/MobileHeader";
 
-const AppContainer = () => {
-  const foo = "bar";
-  return (
-    <div className="app-container">
-      <Menu />
-      <div className="pane-container">
-        <Routes />
-      </div>
+const AppContainer = () => (
+  <div className="app-container">
+    <Menu />
+    <div className="pane-container">
+      <Routes />
     </div>
-  );
-};
+    <MobileHeader />
+  </div>
+);
 
 export default AppContainer;
