@@ -14,8 +14,8 @@ const LogoPortrait = props => {
     <svg
       version="1.1"
       className="portrait-logo"
-      xmlns="http://www.w3.org/2000/svg"
-      xmlnsXlink="http://www.w3.org/1999/xlink"
+      xmlns="https://www.w3.org/2000/svg"
+      xmlnsXlink="https://www.w3.org/1999/xlink"
       x="0px"
       y="0px"
       viewBox="0 0 384.58 384.58"
