@@ -10,7 +10,7 @@ const Dashboard = () => {
       <div className="about-column">
         <div className="container content">
           <div className="circle">
-            <img src="http://static.jimcamut.com/img/jimcamut.jpg" />
+            <img src={require("../../assets/img/jimcamut.jpg")} />
           </div>
           <h1>Jim Camut</h1>
           <p>
@@ -26,16 +26,7 @@ const Dashboard = () => {
         </div>
       </div>
       {/* <Loader /> */}
-      <div
-        style={{
-          flex: 1,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexDirection: "column",
-          color: "#fff"
-        }}
-      >
+      <div className="coming-soon">
         <h2>More coming soon!</h2>
         <p>This website is under construction</p>
       </div>

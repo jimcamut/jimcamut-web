@@ -17,6 +17,21 @@
   }
 }
 
+.coming-soon {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #fff;
+  background-color: $app_bg;
+  padding: 20px;
+
+  @media (max-width: 600px) {
+    width: 100%;
+  }
+}
+
 .about-column {
   width: 50%;
   min-width: 200px;
