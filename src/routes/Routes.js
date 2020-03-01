@@ -9,17 +9,28 @@ import About from "../screens/About/About";
 import Strava from "../screens/Strava/Strava";
 import Grams from "../screens/Grams/Grams";
 import Tweets from "../screens/Tweets/Tweets";
+import ReactGA from "react-ga";
+
+const trackGA = location => {
+  const page = location && location.pathname;
+  if (!page) return;
+  ReactGA.set({ page });
+  ReactGA.pageview(page);
+};
 
 const Routes = props => {
   const { user } = props;
   const { id, sessionToken } = user || {};
 
   // Tracking GA
-  //props.history.listen(location => console.log(location.pathname));
+  props.history.listen(location => trackGA(location));
+  useLayoutEffect(() => trackGA(window.location), []);
 
   // Add "isAuthenticated" to props for PrivateRoute
   const isAuthenticated = !!sessionToken;
-  const data = Object.assign({}, props, { isAuthenticated });
+  const data = Object.assign({}, props, {
+    isAuthenticated
+  });
   let token;
 
   try {
