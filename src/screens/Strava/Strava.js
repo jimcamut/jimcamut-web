@@ -6,6 +6,7 @@ import { setFeed } from "../../redux/actions/feed";
 import StravaCard from "../../components/StravaCard/StravaCard";
 import InfiniteScroll from "react-infinite-scroll-component";
 import _ from "lodash";
+import Loader from "../../components/Loader/Loader";
 
 const fetchLimit = 10;
 
@@ -17,9 +18,7 @@ const Strava = props => {
   const [hasMore, setHasMore] = useState(true);
 
   const getStravaFeed = opts => {
-    console.log("getting");
     if (loadingFeed) return;
-    // const last = props.feed.data[]
     opts = opts || {
       limit: fetchLimit,
       after:
@@ -34,7 +33,6 @@ const Strava = props => {
         props.setFeed(_.uniqBy(newData.slice(0, fetchLimit), "id"));
         setStateFeed(newData);
         setLoadingFeed(false);
-
         if (feed.length < (opts.limit || fetchLimit)) {
           setHasMore(false);
         }
@@ -60,34 +58,12 @@ const Strava = props => {
           style={{ height: "fetchLimit0%", width: "fetchLimit0%" }}
         >
           <InfiniteScroll
-            // pageStart={0}
-            // loadMore={() => getStravaFeed()}
-            // hasMore={true}
-            // useWindow={false}
-
             scrollableTarget="scroll-cont"
             dataLength={stateFeed.length} //This is important field to render the next data
             next={() => getStravaFeed()}
             hasMore={hasMore}
-            loader={<h4>Loading...</h4>}
-            endMessage={
-              <p style={{ textAlign: "center" }}>
-                <b>Yay! You have seen it all</b>
-              </p>
-            }
-            // below props only if you need pull down functionality
-            // refreshFunction={() => console.log("refresh")}
-            // pullDownToRefresh
-            // pullDownToRefreshContent={
-            //   <h3 style={{ textAlign: "center" }}>
-            //     &#8595; Pull down to refresh
-            //   </h3>
-            // }
-            // releaseToRefreshContent={
-            //   <h3 style={{ textAlign: "center" }}>
-            //     &#8593; Release to refresh
-            //   </h3>
-            // }
+            loading={loadingFeed}
+            loader={<Loader />}
           >
             {stateFeed.map(it => (
               <Row key={it.id} it={it} />
