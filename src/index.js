@@ -6,7 +6,7 @@ import * as serviceWorker from "./serviceWorker";
 import ReactGA from "react-ga";
 
 ReactGA.initialize("UA-11356612-4", {
-  debug: process.env.NODE_ENV === "development"
+  debug: false //process.env.NODE_ENV === "development"
 });
 
 ReactDOM.render(<App />, document.getElementById("root"));
