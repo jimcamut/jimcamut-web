@@ -7,5 +7,5 @@ export const UPDATE_USER = "UPDATE_USER";
 export const UPDATE_META = "UPDATE_META";
 
 // feed
-export const SET_FEED = "SET_FEED";
-export const UPDATE_FEED = "UPDATE_FEED";
+export const SET_STRAVA = "SET_STRAVA";
+export const UPDATE_STRAVA = "UPDATE_STRAVA";

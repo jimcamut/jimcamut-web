@@ -17,7 +17,7 @@ const StravaCard = props => {
     .replace("0 hr ", "");
 
   const minPerMile = moving_time / 60 / miles;
-  const paceType = type === "Run" ? "Mins per mile" : "MPH";
+  const paceType = type === "Run" ? "Per mile" : "MPH";
   const pace =
     type === "Run"
       ? moment

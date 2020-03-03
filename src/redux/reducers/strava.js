@@ -1,4 +1,4 @@
-import { UPDATE_FEED, SET_FEED } from "../actions/types";
+import { UPDATE_STRAVA, SET_STRAVA } from "../actions/types";
 import { addToList } from "./utils";
 
 const initialState = {
@@ -6,9 +6,9 @@ const initialState = {
   fetched: null
 };
 
-const FeedReducer = (state = initialState, action) => {
+const StravaReducer = (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_FEED: {
+    case UPDATE_STRAVA: {
       console.log("UPDATING", action);
       return {
         ...state,
@@ -16,7 +16,7 @@ const FeedReducer = (state = initialState, action) => {
         fetched: new Date()
       };
     }
-    case SET_FEED: {
+    case SET_STRAVA: {
       return {
         data: action.payload || [],
         fetched: new Date()
@@ -27,4 +27,4 @@ const FeedReducer = (state = initialState, action) => {
   }
 };
 
-export default FeedReducer;
+export default StravaReducer;

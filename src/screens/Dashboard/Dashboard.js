@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import "./style.scss";
 import Loader from "../../components/Loader/Loader";
 import { Link } from "react-router-dom";
+import { ping } from "../../api/api";
 
 const Dashboard = () => {
-  const foo = "bar";
+  useEffect(() => ping(), []);
+
   return (
     <div className="dashboard">
       <div className="about-column">

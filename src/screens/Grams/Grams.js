@@ -9,6 +9,7 @@ import { fetchGrams } from "../../api/api";
 import _ from "lodash";
 import Loader from "../../components/Loader/Loader";
 
+const sorter = (a, b) => b.timestamp - a.timestamp;
 const fetchLimit = 10;
 
 const Gram = ({ id, media_url, media_type }) => (
@@ -43,8 +44,11 @@ let Grams = () => {
     setLoadingFeed(true);
     fetchGrams(opts)
       .then(feed => {
-        const newData = _.uniqBy(stateFeed.concat(feed), "id");
-        //props.setFeed(_.uniqBy(newData.slice(0, 10), "id"));
+        let newData;
+        if (feed.length) {
+          newData = _.uniqBy(stateFeed.concat(feed), "id").sort(sorter);
+          //props.setFeed(_.uniqBy(newData.slice(0, 10), "id"));
+        }
         setStateFeed(newData);
         setLoadingFeed(false);
 

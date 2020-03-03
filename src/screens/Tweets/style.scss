@@ -1,0 +1,29 @@
+@import "../../assets/scss/colors.scss";
+
+.page-tweets {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  .scroll-container {
+    overflow: auto;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    width: 100%;
+
+    .infinite-scroll-component {
+      overflow: visible !important;
+      max-width: 600px;
+    }
+  }
+}
+
+.tweet-item {
+  background-color: lighten($app_bg, 10%);
+  color: #fff;
+  padding: 20px 30px;
+  border-radius: 5px;
+  margin: 20px auto;
+}

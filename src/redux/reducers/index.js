@@ -2,12 +2,12 @@ import { combineReducers } from "redux";
 
 import User from "./user";
 import MetaReducer from "./meta";
-import FeedReducer from "./feed";
+import StravaReducer from "./strava";
 
 const AppReducer = combineReducers({
   user: User,
   meta: MetaReducer,
-  feed: FeedReducer
+  strava: StravaReducer
 });
 
 const RootReducer = (state, action) => {
