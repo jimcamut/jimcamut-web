@@ -5,14 +5,16 @@ import { Link } from "react-router-dom";
 import { ping } from "../../api/api";
 
 const Dashboard = () => {
-  useEffect(() => ping(), []);
+  useEffect(() => {
+    ping();
+  }, []);
 
   return (
     <div className="dashboard">
       <div className="about-column">
         <div className="container content">
           <div className="circle">
-            <img src={require("../../assets/img/jimcamut.jpg")} />
+            <img src={require("../../assets/img/jimcamut.jpg")} alt="profile" />
           </div>
           <h1>Jim Camut</h1>
           <p>

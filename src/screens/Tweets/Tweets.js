@@ -5,17 +5,18 @@ import { fetchTweets } from "../../api/api";
 import _ from "lodash";
 import Loader from "../../components/Loader/Loader";
 import TwitterCard from "../../components/TwitterCard/TwitterCard";
+import { connect } from "react-redux";
+import { setTweets } from "../../redux/actions/tweets";
 
 const sorter = (a, b) => b.created_at - a.created_at;
 const fetchLimit = 20;
 
-let Tweets = () => {
+let Tweets = props => {
   const [loadingFeed, setLoadingFeed] = useState(false);
-  const [stateFeed, setStateFeed] = useState(/*props.feed.data || */ []);
+  const [stateFeed, setStateFeed] = useState(props.tweets.data || []);
   const [hasMore, setHasMore] = useState(true);
 
   const getTweetsFeed = opts => {
-    console.log("getting", opts);
     if (loadingFeed) return;
     // const last = props.feed.data[]
     opts = opts || {
@@ -26,26 +27,19 @@ let Tweets = () => {
         undefined
     };
 
-    try {
-      console.log(stateFeed, stateFeed.length - 1);
-    } catch (e) {}
-
-    console.log(opts.after);
-
     setLoadingFeed(true);
     fetchTweets(opts)
       .then(feed => {
-        console.log("GOT", feed);
         let newData;
         if (feed.length) {
           newData = _.uniqBy(stateFeed.concat(feed), "id").sort(sorter);
           //props.setFeed(_.uniqBy(newData.slice(0, 10), "id"));
         }
+        props.setTweets(_.uniqBy(newData.slice(0, fetchLimit), "id"));
         setStateFeed(newData);
         setLoadingFeed(false);
 
         if (feed.length < (opts.limit || fetchLimit)) {
-          console.log("ENOUGHHHHH", feed.length, opts.limit, fetchLimit);
           setHasMore(false);
         }
       })
@@ -56,9 +50,7 @@ let Tweets = () => {
   };
 
   useEffect(() => {
-    getTweetsFeed({
-      limit: fetchLimit
-    });
+    getTweetsFeed({ limit: fetchLimit });
   }, []);
 
   return (
@@ -83,4 +75,11 @@ let Tweets = () => {
   );
 };
 
-export default Tweets;
+export default connect(
+  state => ({
+    tweets: state.tweets || {}
+  }),
+  dispatch => ({
+    setTweets: data => dispatch(setTweets(data))
+  })
+)(Tweets);
