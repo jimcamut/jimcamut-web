@@ -1,8 +1,8 @@
 import React, { useLayoutEffect } from 'react';
 import { Route, Redirect, withRouter, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import PrivateRoute from './PrivateRoute';
-import { getURLParams, parseError } from '../utils/utils';
+//import PrivateRoute from './PrivateRoute';
+import { getURLParams /*, parseError */ } from '../utils/utils';
 
 import Dashboard from '../screens/Dashboard/Dashboard';
 import About from '../screens/About/About';
@@ -20,7 +20,7 @@ const trackGA = location => {
 
 const Routes = props => {
   const { user } = props;
-  const { id, sessionToken } = user || {};
+  const { /*id,*/ sessionToken } = user || {};
 
   // Tracking GA
   props.history.listen(location => trackGA(location));
@@ -39,13 +39,13 @@ const Routes = props => {
       .value;
   } catch (e) {}
 
-  const hideToken = () => {
-    window.history.replaceState(
-      {},
-      document.title,
-      window.location.origin + window.location.pathname
-    );
-  };
+  // const hideToken = () => {
+  //   window.history.replaceState(
+  //     {},
+  //     document.title,
+  //     window.location.origin + window.location.pathname
+  //   );
+  // };
 
   // Enable Ability to assume session
   if (token) {
