@@ -1,12 +1,12 @@
-import React, { useState, useEffect, memo } from "react";
-import "./style.scss";
-import { fetchFeed } from "../../api/api";
-import { connect } from "react-redux";
-import { setStrava } from "../../redux/actions/strava";
-import StravaCard from "../../components/StravaCard/StravaCard";
-import InfiniteScroll from "react-infinite-scroll-component";
-import _ from "lodash";
-import Loader from "../../components/Loader/Loader";
+import React, { useState, useEffect, memo } from 'react';
+import './style.scss';
+import { fetchStrava } from '../../api/api';
+import { connect } from 'react-redux';
+import { setStrava } from '../../redux/actions/strava';
+import StravaCard from '../../components/StravaCard/StravaCard';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import _ from 'lodash';
+import Loader from '../../components/Loader/Loader';
 
 const fetchLimit = 10;
 const sorter = (a, b) => new Date(b.start_date) - new Date(a.start_date);
@@ -28,14 +28,14 @@ const Strava = props => {
     };
 
     setLoadingFeed(true);
-    fetchFeed(opts)
+    fetchStrava(opts)
       .then(feed => {
         let newData;
         if (feed.length) {
-          newData = _.uniqBy(stateFeed.concat(feed), "id").sort(sorter);
+          newData = _.uniqBy(stateFeed.concat(feed), 'id').sort(sorter);
           //props.setFeed(_.uniqBy(newData.slice(0, 10), "id"));
         }
-        props.setStrava(_.uniqBy(newData.slice(0, fetchLimit), "id"));
+        props.setStrava(_.uniqBy(newData.slice(0, fetchLimit), 'id'));
         setStateFeed(newData);
         setLoadingFeed(false);
         if (feed.length < (opts.limit || fetchLimit)) {

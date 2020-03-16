@@ -25,7 +25,7 @@ export const ping = () => {
   });
 };
 
-export const fetchFeed = params => {
+export const fetchStrava = params => {
   return new Promise((resolve, reject) => {
     const { limit, after } = params || {};
     _req({
