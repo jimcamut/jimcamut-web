@@ -29,7 +29,7 @@ const WeekGraph = ({ week, type = 'Run', toggleWeek, weekIdx }) => {
           .utc(moment.duration(minPerMile, 'minutes').asMilliseconds())
           .format('m:ss')
       : mph.toFixed(2);
-  pace = isNaN(pace) ? '0:00' : pace;
+  // pace = isNaN(pace) ? '0:00' : pace;
 
   const max = weekSet.reduce(
     (max = 0, set = [null, 0]) =>
