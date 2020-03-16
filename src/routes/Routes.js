@@ -1,15 +1,15 @@
-import React, { useLayoutEffect } from "react";
-import { Route, Redirect, withRouter, Switch } from "react-router-dom";
-import { connect } from "react-redux";
-import PrivateRoute from "./PrivateRoute";
-import { getURLParams, parseError } from "../utils/utils";
+import React, { useLayoutEffect } from 'react';
+import { Route, Redirect, withRouter, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PrivateRoute from './PrivateRoute';
+import { getURLParams, parseError } from '../utils/utils';
 
-import Dashboard from "../screens/Dashboard/Dashboard";
-import About from "../screens/About/About";
-import Strava from "../screens/Strava/Strava";
-import Grams from "../screens/Grams/Grams";
-import Tweets from "../screens/Tweets/Tweets";
-import ReactGA from "react-ga";
+import Dashboard from '../screens/Dashboard/Dashboard';
+import About from '../screens/About/About';
+import Strava from '../screens/Strava/Strava';
+import Grams from '../screens/Grams/Grams';
+import Tweets from '../screens/Tweets/Tweets';
+import ReactGA from 'react-ga';
 
 const trackGA = location => {
   const page = location && location.pathname;
@@ -35,7 +35,7 @@ const Routes = props => {
 
   try {
     const urlParams = getURLParams() || [];
-    token = ((urlParams || []).find(it => it && it.key === "session") || {})
+    token = ((urlParams || []).find(it => it && it.key === 'session') || {})
       .value;
   } catch (e) {}
 
@@ -67,7 +67,7 @@ const Routes = props => {
   // Don't make the user login again
   if (
     isAuthenticated &&
-    ["/", "/register", "/login"].includes(props.location.pathname)
+    ['/', '/register', '/login'].includes(props.location.pathname)
   ) {
     // return (
     //   <Redirect
