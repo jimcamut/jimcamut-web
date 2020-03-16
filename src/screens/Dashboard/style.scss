@@ -1,4 +1,4 @@
-@import "../../assets/scss/colors.scss";
+@import '../../assets/scss/colors.scss';
 
 $aboutBreak: 800px;
 
@@ -49,6 +49,11 @@ $aboutBreak: 800px;
     height: auto;
   }
 
+  @media (min-width: 1500px) {
+    min-width: 320px;
+    width: 320px;
+  }
+
   .container {
     display: flex;
     flex: 1;
@@ -91,6 +96,8 @@ $aboutBreak: 800px;
   flex: 1 1;
   justify-content: space-between;
   flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 .flex-grid-halfs .col {
   width: 48%;

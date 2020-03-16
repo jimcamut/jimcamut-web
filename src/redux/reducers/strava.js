@@ -1,5 +1,5 @@
-import { UPDATE_STRAVA, SET_STRAVA } from "../actions/types";
-import { addToList } from "./utils";
+import { UPDATE_STRAVA, SET_STRAVA } from '../actions/types';
+import { addToList } from './utils';
 
 const initialState = {
   data: [],
@@ -9,7 +9,6 @@ const initialState = {
 const StravaReducer = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_STRAVA: {
-      console.log("UPDATING", action);
       return {
         ...state,
         data: addToList(state.data, action.payload || []),

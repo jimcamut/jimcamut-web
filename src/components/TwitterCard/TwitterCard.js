@@ -1,10 +1,10 @@
-import React, { memo } from "react";
-import "./style.scss";
-import Linkify from "react-linkify";
-import moment from "moment-timezone";
-import strReplace from "react-string-replace";
-import Card from "../Card/Card";
-const tz = "America/Los_Angeles";
+import React, { memo } from 'react';
+import './style.scss';
+import Linkify from 'react-linkify';
+import moment from 'moment-timezone';
+import strReplace from 'react-string-replace';
+import Card from '../Card/Card';
+const tz = 'America/Los_Angeles';
 
 const LinkPreview = ({
   author,
@@ -41,16 +41,16 @@ const TwitterCard = memo(
     urlPreview,
     style,
     created_at,
-    name = "@jimcamut"
+    name = '@jimcamut'
   }) => {
     const image = (
       ((entities || {}).media || []).find(m => m && m.media_url_https) || {}
     ).media_url_https;
 
     try {
-      text = text || "";
+      text = text || '';
     } catch (e) {
-      console.log(e);
+      // console.log(e);
     }
 
     const hashified = strReplace(text, /(#[a-z\d][\w-]*)/gi, (match, i) => (
@@ -75,7 +75,7 @@ const TwitterCard = memo(
         title={name}
         subtitle={moment
           .tz(new Date(created_at), tz)
-          .format("MMM DD, YYYY h:mm a z")}
+          .format('MMM DD, YYYY h:mm a z')}
         content={
           text &&
           text.length > 0 && (

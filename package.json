@@ -4,6 +4,13 @@
   "engines": {
     "node": "10.17.x"
   },
+  "main": "index.js",
+  "lint-staged": {
+    "src/**/*.js": [
+      "prettier --write",
+      "git add"
+    ]
+  },
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -32,7 +39,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prettier": "prettier --write src/**/*.js __tests__/**/*.js",
+    "prettier:ci": "prettier --list-different src/**/*.js  __tests__/**/*.js",
+    "lint": "eslint src/**/*.js __tests__/**/*.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -52,5 +62,17 @@
   "resolutions": {
     "**/react": "16.12.0",
     "**/react-dom": "16.12.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.0.8",
+    "prettier": "^1.19.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }

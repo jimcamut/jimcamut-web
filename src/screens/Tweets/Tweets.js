@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import "./style.scss";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { fetchTweets } from "../../api/api";
-import _ from "lodash";
-import Loader from "../../components/Loader/Loader";
-import TwitterCard from "../../components/TwitterCard/TwitterCard";
-import { connect } from "react-redux";
-import { setTweets } from "../../redux/actions/tweets";
+import React, { useState, useEffect } from 'react';
+import './style.scss';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import { fetchTweets } from '../../api/api';
+import _ from 'lodash';
+import Loader from '../../components/Loader/Loader';
+import TwitterCard from '../../components/TwitterCard/TwitterCard';
+import { connect } from 'react-redux';
+import { setTweets } from '../../redux/actions/tweets';
 
 const sorter = (a, b) => b.created_at - a.created_at;
 const fetchLimit = 20;
@@ -32,10 +32,10 @@ let Tweets = props => {
       .then(feed => {
         let newData;
         if (feed.length) {
-          newData = _.uniqBy(stateFeed.concat(feed), "id").sort(sorter);
+          newData = _.uniqBy(stateFeed.concat(feed), 'id').sort(sorter);
           //props.setFeed(_.uniqBy(newData.slice(0, 10), "id"));
         }
-        props.setTweets(_.uniqBy(newData.slice(0, fetchLimit), "id"));
+        props.setTweets(_.uniqBy(newData.slice(0, fetchLimit), 'id'));
         setStateFeed(newData);
         setLoadingFeed(false);
 
@@ -44,7 +44,7 @@ let Tweets = props => {
         }
       })
       .catch(err => {
-        console.log(err);
+        // console.log(err);
         setLoadingFeed(false);
       });
   };

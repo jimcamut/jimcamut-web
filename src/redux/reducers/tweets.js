@@ -1,5 +1,5 @@
-import { UPDATE_TWEETS, SET_TWEETS } from "../actions/types";
-import { addToList } from "./utils";
+import { UPDATE_TWEETS, SET_TWEETS } from '../actions/types';
+import { addToList } from './utils';
 
 const initialState = {
   data: [],
@@ -9,7 +9,6 @@ const initialState = {
 const TweetsReducer = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_TWEETS: {
-      console.log("UPDATING", action);
       return {
         ...state,
         data: addToList(state.data, action.payload || []),
