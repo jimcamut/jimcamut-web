@@ -2,19 +2,20 @@ import React, { useState, useEffect, memo } from "react";
 import "./style.scss";
 import { fetchFeed } from "../../api/api";
 import { connect } from "react-redux";
-import { setFeed } from "../../redux/actions/feed";
+import { setStrava } from "../../redux/actions/strava";
 import StravaCard from "../../components/StravaCard/StravaCard";
 import InfiniteScroll from "react-infinite-scroll-component";
 import _ from "lodash";
 import Loader from "../../components/Loader/Loader";
 
 const fetchLimit = 10;
+const sorter = (a, b) => new Date(b.start_date) - new Date(a.start_date);
 
-const Row = memo(({ it }) => <StravaCard key={it.id} data={it} />);
+const Row = memo(data => <StravaCard {...data} />);
 
 const Strava = props => {
   const [loadingFeed, setLoadingFeed] = useState(false);
-  const [stateFeed, setStateFeed] = useState(props.feed.data || []);
+  const [stateFeed, setStateFeed] = useState(props.strava.data || []);
   const [hasMore, setHasMore] = useState(true);
 
   const getStravaFeed = opts => {
@@ -29,8 +30,12 @@ const Strava = props => {
     setLoadingFeed(true);
     fetchFeed(opts)
       .then(feed => {
-        const newData = _.uniqBy(stateFeed.concat(feed), "id");
-        props.setFeed(_.uniqBy(newData.slice(0, fetchLimit), "id"));
+        let newData;
+        if (feed.length) {
+          newData = _.uniqBy(stateFeed.concat(feed), "id").sort(sorter);
+          //props.setFeed(_.uniqBy(newData.slice(0, 10), "id"));
+        }
+        props.setStrava(_.uniqBy(newData.slice(0, fetchLimit), "id"));
         setStateFeed(newData);
         setLoadingFeed(false);
         if (feed.length < (opts.limit || fetchLimit)) {
@@ -61,9 +66,7 @@ const Strava = props => {
             loading={loadingFeed}
             loader={<Loader />}
           >
-            {stateFeed.map(it => (
-              <Row key={it.id} it={it} />
-            ))}
+            {stateFeed.map(it => it && <Row {...it} key={it.id} />)}
           </InfiniteScroll>
         </div>
       )}
@@ -73,9 +76,9 @@ const Strava = props => {
 
 export default connect(
   state => ({
-    feed: state.feed || {}
+    strava: state.strava || {}
   }),
   dispatch => ({
-    setFeed: data => dispatch(setFeed(data))
+    setStrava: data => dispatch(setStrava(data))
   })
 )(Strava);

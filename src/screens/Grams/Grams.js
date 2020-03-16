@@ -1,30 +1,15 @@
 import React, { useState, useEffect, memo } from "react";
 import "./style.scss";
 import InfiniteScroll from "react-infinite-scroll-component";
-
 import { fetchGrams } from "../../api/api";
-// import { connect } from "react-redux";
-// import { setFeed } from "../../redux/actions/feed";
-// import StravaCard from "../../components/StravaCard/StravaCard";
 import _ from "lodash";
 import Loader from "../../components/Loader/Loader";
+import GramCard from "../../components/GramCard/GramCard";
 
+const sorter = (a, b) => b.timestamp - a.timestamp;
 const fetchLimit = 10;
 
-const Gram = ({ id, media_url, media_type }) => (
-  <div className="image-item">
-    {["IMAGE", "CAROUSEL_ALBUM"].includes(media_type) && (
-      <img src={media_url} alt={`ig-${id}`} />
-    )}
-    {media_type === "VIDEO" && (
-      <video alt={`ig-${id}`} controls>
-        <source src={media_url} type="video/mp4" />
-      </video>
-    )}
-  </div>
-);
-
-let Grams = () => {
+const Grams = () => {
   const [loadingFeed, setLoadingFeed] = useState(false);
   const [stateFeed, setStateFeed] = useState(/*props.feed.data || */ []);
   const [hasMore, setHasMore] = useState(true);
@@ -43,8 +28,11 @@ let Grams = () => {
     setLoadingFeed(true);
     fetchGrams(opts)
       .then(feed => {
-        const newData = _.uniqBy(stateFeed.concat(feed), "id");
-        //props.setFeed(_.uniqBy(newData.slice(0, 10), "id"));
+        let newData;
+        if (feed.length) {
+          newData = _.uniqBy(stateFeed.concat(feed), "id").sort(sorter);
+          //props.setFeed(_.uniqBy(newData.slice(0, 10), "id"));
+        }
         setStateFeed(newData);
         setLoadingFeed(false);
 
@@ -81,7 +69,7 @@ let Grams = () => {
         >
           <div className="image-grid">
             {stateFeed.length &&
-              stateFeed.map((data, idx) => <Gram {...data} key={idx} />)}
+              stateFeed.map((data, idx) => <GramCard {...data} key={idx} />)}
           </div>
         </InfiniteScroll>
       </div>

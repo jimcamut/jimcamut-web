@@ -2,12 +2,13 @@ import React, { memo } from "react";
 import "./style.scss";
 import moment from "moment-timezone";
 import CacheImage from "../CacheImage/CacheImage";
-import { MdDirectionsBike, MdDirectionsRun } from "react-icons/md";
 import { cacheImages, getGoogleImg, getStravaImg } from "./constants";
+import Card from "../Card/Card";
+import StatContainer from "./StatContainer/StatContainer";
 
 const StravaCard = props => {
-  const { name, type, map, start_date, distance, moving_time } =
-    props.data || {};
+  const { name, type, map, start_date, distance, moving_time } = props || {};
+  if (!map) return null;
   const tz = moment.tz.guess();
   const miles = 0.000621371192237 * distance;
   const mph = miles / (moving_time / 60 / 60);
@@ -17,7 +18,7 @@ const StravaCard = props => {
     .replace("0 hr ", "");
 
   const minPerMile = moving_time / 60 / miles;
-  const paceType = type === "Run" ? "Mins per mile" : "MPH";
+  const paceType = type === "Run" ? "Per mile" : "MPH";
   const pace =
     type === "Run"
       ? moment
@@ -39,46 +40,23 @@ const StravaCard = props => {
   };
 
   return (
-    <div className="strava-card" style={props.style || {}}>
-      <div className="top">
-        <div className="title-container">
-          <img
-            src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/802863/634527/2/medium.jpg"
-            alt="Strava Thumbnail"
-            width="60"
-            height="60"
-            className="thumb"
-          />
-          <div className="title-container">
-            <h3 className="title">{name}</h3>
-            <p className="subtitle">
-              {moment
-                .tz(new Date(start_date), tz)
-                .format("MMM DD, YYYY h:mm a z")}
-            </p>
-          </div>
-        </div>
-        <div className="stat-container">
-          <div className="stat-item">
-            {type === "Run" && <MdDirectionsRun className="icon type-icon" />}
-            {type === "Ride" && <MdDirectionsBike className="icon type-icon" />}
-            <span className="subtitle">{type}</span>
-          </div>
-          <div className="stat-item">
-            <span className="value">{miles.toFixed(2)}</span>
-            <span className="subtitle">Miles</span>
-          </div>
-          <div className="stat-item">
-            <span className="value">{duration}</span>
-            <span className="subtitle">Duration</span>
-          </div>
-          <div className="stat-item">
-            <span className="value">{pace}</span>
-            <span className="subtitle">{paceType}</span>
-          </div>
-        </div>
-      </div>
-      <div className="bottom">
+    <Card
+      className="strava-card"
+      thumb="https://dgalywyr863hv.cloudfront.net/pictures/athletes/802863/634527/2/medium.jpg"
+      title={name}
+      subtitle={moment
+        .tz(new Date(start_date), tz)
+        .format("MMM DD, YYYY h:mm a z")}
+      topExtra={
+        <StatContainer
+          type={type}
+          miles={miles}
+          duration={duration}
+          pace={pace}
+          paceType={paceType}
+        />
+      }
+      content={
         <div className="img-container">
           {map && map.summary_polyline && (
             <>
@@ -102,8 +80,8 @@ const StravaCard = props => {
             </>
           )}
         </div>
-      </div>
-    </div>
+      }
+    />
   );
 };
 

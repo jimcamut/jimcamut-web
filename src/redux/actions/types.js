@@ -6,6 +6,17 @@ export const UPDATE_USER = "UPDATE_USER";
 // Meta
 export const UPDATE_META = "UPDATE_META";
 
-// feed
-export const SET_FEED = "SET_FEED";
-export const UPDATE_FEED = "UPDATE_FEED";
+// Strava
+export const SET_STRAVA = "SET_STRAVA";
+export const UPDATE_STRAVA = "UPDATE_STRAVA";
+
+// Grams
+export const SET_GRAMS = "SET_GRAMS";
+export const UPDATE_GRAMS = "UPDATE_GRAMS";
+
+// Tweets
+export const SET_TWEETS = "SET_TWEETS";
+export const UPDATE_TWEETS = "UPDATE_TWEETS";
+
+// Dash
+export const SET_DASH = "SET_DASH";

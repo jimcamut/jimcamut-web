@@ -1,0 +1,75 @@
+@import "../../assets/scss/colors.scss";
+
+$light_bg: lighten($app_bg, 2%);
+$dark_bg: darken($app_bg, 2%);
+
+.link-preview {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+
+  font-size: 90%;
+
+  a {
+    width: 100%;
+    height: 100%;
+    color: #fff;
+  }
+
+  .text-container {
+    width: 100%;
+    padding: 0px 30px;
+    h3,
+    p,
+    span {
+      display: block;
+      margin: 0;
+      opacity: 0.5;
+    }
+
+    span.publisher,
+    p.date {
+      font-size: 80%;
+    }
+
+    p.description {
+      margin-top: 10px;
+    }
+  }
+}
+
+// Extending Card
+.twitter-card {
+  padding: 0;
+  .top,
+  .bottom {
+    padding: 0 30px;
+  }
+
+  .top {
+    margin-top: 20px;
+  }
+
+  .text-container {
+    margin: 20px auto;
+  }
+
+  .bottom p {
+    line-height: 1.4;
+  }
+
+  .bottom {
+    margin-top: 20px;
+  }
+
+  .img-container {
+    width: 100%;
+    height: 300px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}

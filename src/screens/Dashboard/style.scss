@@ -1,5 +1,7 @@
 @import "../../assets/scss/colors.scss";
 
+$aboutBreak: 800px;
+
 .dashboard {
   display: flex;
   flex: 1 1;
@@ -7,8 +9,12 @@
   justify-content: center;
   height: 100%;
 
-  @media (max-width: 600px) {
+  @media (max-width: $aboutBreak) {
     flex-direction: column;
+    height: auto;
+    display: block;
+    overflow: auto;
+
     .about-column {
       width: 100%;
       min-width: inherit;
@@ -27,18 +33,21 @@
   background-color: $app_bg;
   padding: 20px;
 
-  @media (max-width: 600px) {
+  @media (max-width: $aboutBreak) {
     width: 100%;
   }
 }
 
 .about-column {
-  width: 50%;
-  min-width: 200px;
-  max-width: 400px;
+  min-width: 280px;
+  width: 280px;
   height: 100%;
   color: #fff;
   text-align: center;
+
+  @media (max-width: $aboutBreak) {
+    height: auto;
+  }
 
   .container {
     display: flex;
@@ -61,6 +70,51 @@
     img {
       width: 140px;
       height: 140px;
+    }
+  }
+}
+
+.dashcenter {
+  display: block;
+  overflow: auto;
+  height: 100%;
+  width: 100%;
+
+  @media (max-width: $aboutBreak) {
+    height: auto;
+    overflow: hidden;
+  }
+}
+
+.flex-grid-halfs {
+  display: flex;
+  flex: 1 1;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.flex-grid-halfs .col {
+  width: 48%;
+  height: 48%;
+  padding: 30px;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  color: $blue1;
+
+  img {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .flex-grid-halfs {
+    display: block;
+    .col {
+      width: 100%;
+      margin: 0 0 10px 0;
     }
   }
 }
