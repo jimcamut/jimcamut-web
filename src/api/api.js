@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 const { REACT_APP_API_URL, REACT_APP_API_VERSION } = process.env;
 const apiBase = `${REACT_APP_API_URL}/${REACT_APP_API_VERSION}`;
@@ -8,7 +8,7 @@ const apiBase = `${REACT_APP_API_URL}/${REACT_APP_API_VERSION}`;
 const _req = options => {
   return new Promise((resolve, reject) => {
     options = options || {};
-    options.method = options.method || "get";
+    options.method = options.method || 'get';
     axios(options)
       .then(resolve)
       .catch(reject);

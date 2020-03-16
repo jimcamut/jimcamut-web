@@ -1,18 +1,16 @@
-import React from "react";
-import "./style.scss";
-import Loader from "../../components/Loader/Loader";
-import StravaCard from "../../components/StravaCard/StravaCard";
-import TwitterCard from "../../components/TwitterCard/TwitterCard";
-import GramCard from "../../components/GramCard/GramCard";
-import { Link } from "react-router-dom";
-import Workouts from "../../components/Workouts/Workouts";
-import Card from "../../components/Card/Card";
+import React from 'react';
+import './style.scss';
+import StravaCard from '../../components/StravaCard/StravaCard';
+import TwitterCard from '../../components/TwitterCard/TwitterCard';
+import GramCard from '../../components/GramCard/GramCard';
+import { Link } from 'react-router-dom';
+import Workouts from '../../components/Workouts/Workouts';
+import Card from '../../components/Card/Card';
 
 const DashCenter = props => {
-  const { loading, dashData } = props || {};
+  const { dashData } = props || {};
   const data = dashData || {};
   const { run_month, bike_month, tweet, strava, gram } = data || {};
-  console.log("data", data);
   return (
     <div className="dashcenter">
       <div className="flex-grid-halfs">

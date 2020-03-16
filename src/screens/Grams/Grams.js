@@ -1,10 +1,10 @@
-import React, { useState, useEffect, memo } from "react";
-import "./style.scss";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { fetchGrams } from "../../api/api";
-import _ from "lodash";
-import Loader from "../../components/Loader/Loader";
-import GramCard from "../../components/GramCard/GramCard";
+import React, { useState, useEffect } from 'react';
+import './style.scss';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import { fetchGrams } from '../../api/api';
+import _ from 'lodash';
+import Loader from '../../components/Loader/Loader';
+import GramCard from '../../components/GramCard/GramCard';
 
 const sorter = (a, b) => b.timestamp - a.timestamp;
 const fetchLimit = 10;
@@ -15,7 +15,6 @@ const Grams = () => {
   const [hasMore, setHasMore] = useState(true);
 
   const getGramsFeed = opts => {
-    console.log("getting", opts);
     if (loadingFeed) return;
     // const last = props.feed.data[]
     opts = opts || {
@@ -30,14 +29,14 @@ const Grams = () => {
       .then(feed => {
         let newData;
         if (feed.length) {
-          newData = _.uniqBy(stateFeed.concat(feed), "id").sort(sorter);
+          newData = _.uniqBy(stateFeed.concat(feed), 'id').sort(sorter);
           //props.setFeed(_.uniqBy(newData.slice(0, 10), "id"));
         }
         setStateFeed(newData);
         setLoadingFeed(false);
 
         if (feed.length < (opts.limit || fetchLimit)) {
-          console.log("ENOUGHHHHH", feed.length, opts.limit, fetchLimit);
+          console.log('ENOUGHHHHH', feed.length, opts.limit, fetchLimit);
           setHasMore(false);
         }
       })
@@ -57,7 +56,7 @@ const Grams = () => {
       <div
         id="grams-scroll-cont"
         className="scroll-container"
-        style={{ height: "100%", width: "100%", overflow: "scroll" }}
+        style={{ height: '100%', width: '100%', overflow: 'scroll' }}
       >
         <InfiniteScroll
           dataLength={stateFeed.length}

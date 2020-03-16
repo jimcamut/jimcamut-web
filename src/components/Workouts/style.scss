@@ -1,4 +1,4 @@
-@import "../../assets/scss/colors.scss";
+@import '../../assets/scss/colors.scss';
 
 .graph-container {
   display: flex;
@@ -16,7 +16,10 @@
     flex: 1 1;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
+
+    &:not(.hide) {
+      cursor: pointer;
+    }
 
     &.hide {
       opacity: 0;
@@ -25,6 +28,8 @@
     .icon {
       font-size: 30px;
       color: $stravaOrange;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 5px;
     }
   }
 }
