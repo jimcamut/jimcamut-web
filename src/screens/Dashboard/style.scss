@@ -118,3 +118,11 @@ $aboutBreak: 800px;
     }
   }
 }
+
+@media (max-width: 600px) {
+  .flex-grid-halfs {
+    .col {
+      padding: 15px 0;
+    }
+  }
+}

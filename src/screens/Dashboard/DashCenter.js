@@ -15,33 +15,30 @@ const DashCenter = props => {
   console.log("data", data);
   return (
     <div className="dashcenter">
-      {props.loading && <Loader />}
-      {!props.loading && (
-        <div className="flex-grid-halfs">
+      <div className="flex-grid-halfs">
+        <div className="col">
+          <Workouts run_month={run_month} bike_month={bike_month} />
+          <Link to="strava">See More Strava</Link>
+        </div>
+        {strava && (
           <div className="col">
-            <Workouts run_month={run_month} bike_month={bike_month} />
+            <StravaCard {...strava} />
             <Link to="strava">See More Strava</Link>
           </div>
-          {strava && (
-            <div className="col">
-              <StravaCard {...strava} />
-              <Link to="strava">See More Strava</Link>
-            </div>
-          )}
-          {tweet && (
-            <div className="col">
-              <TwitterCard {...tweet} />
-              <Link to="tweets">See More Tweets</Link>
-            </div>
-          )}
-          {gram && (
-            <div className="col">
-              <Card title="Latest Instagram" content={<GramCard {...gram} />} />
-              <Link to="grams">See More Grams</Link>
-            </div>
-          )}
-        </div>
-      )}
+        )}
+        {tweet && (
+          <div className="col">
+            <TwitterCard {...tweet} />
+            <Link to="tweets">See More Tweets</Link>
+          </div>
+        )}
+        {gram && (
+          <div className="col">
+            <Card title="Latest Instagram" content={<GramCard {...gram} />} />
+            <Link to="grams">See More Grams</Link>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
