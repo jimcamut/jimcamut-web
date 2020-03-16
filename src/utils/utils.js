@@ -12,7 +12,7 @@ export const getURLParams = () => {
       })
       .filter(it => it);
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     return [];
   }
 };

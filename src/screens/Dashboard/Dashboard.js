@@ -30,8 +30,6 @@ const Dashboard = props => {
     getDash();
   }, []);
 
-  console.log(dashData);
-
   const hasData = Object.keys(dashData || {}).length;
   const showLoader = !hasData && loading;
 
