@@ -3,6 +3,7 @@ import "./style.scss";
 import Linkify from "react-linkify";
 import moment from "moment-timezone";
 import strReplace from "react-string-replace";
+import Card from "../Card/Card";
 const tz = "America/Los_Angeles";
 
 const LinkPreview = ({
@@ -68,42 +69,34 @@ const TwitterCard = memo(
     ));
 
     return (
-      <div className="twitter-card" style={style || {}}>
-        <div className="top">
-          <div className="title-container">
-            <img
-              src="https://pbs.twimg.com/profile_images/860501508193869825/tXZqrevX_400x400.jpg"
-              alt="Twitter Thumbnail"
-              width="60"
-              height="60"
-              className="thumb"
-            />
-            <div className="title-container">
-              <h3 className="title">{name}</h3>
-              <p className="subtitle">
-                {moment
-                  .tz(new Date(created_at), tz)
-                  .format("MMM DD, YYYY h:mm a z")}
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="bottom">
-          {text && text.length > 0 && (
+      <Card
+        className="twitter-card"
+        thumb="https://pbs.twimg.com/profile_images/860501508193869825/tXZqrevX_400x400.jpg"
+        title={name}
+        subtitle={moment
+          .tz(new Date(created_at), tz)
+          .format("MMM DD, YYYY h:mm a z")}
+        content={
+          text &&
+          text.length > 0 && (
             <div className="text-container">
               <Linkify>
                 <p>{taggifed}</p>
               </Linkify>
             </div>
-          )}
-        </div>
-        {urlPreview && <LinkPreview {...urlPreview} />}
-        {image && (
-          <div className="img-container">
-            <img className="media" src={image} alt="twitter media" />
-          </div>
-        )}
-      </div>
+          )
+        }
+        extra={
+          <>
+            {urlPreview && <LinkPreview {...urlPreview} />}
+            {image && (
+              <div className="img-container">
+                <img className="media" src={image} alt="twitter media" />
+              </div>
+            )}
+          </>
+        }
+      />
     );
   }
 );

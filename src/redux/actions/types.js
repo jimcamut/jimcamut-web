@@ -17,3 +17,6 @@ export const UPDATE_GRAMS = "UPDATE_GRAMS";
 // Tweets
 export const SET_TWEETS = "SET_TWEETS";
 export const UPDATE_TWEETS = "UPDATE_TWEETS";
+
+// Dash
+export const SET_DASH = "SET_DASH";

@@ -1,0 +1,36 @@
+@import "../../../assets/scss/colors.scss";
+
+.stat-container {
+  margin: 30px 0 10px;
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+
+  .stat-item {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-right: thin solid rgba(255, 255, 255, 0.1);
+    height: 70px;
+    &:last-child {
+      border-right: none;
+    }
+
+    .value {
+      font-size: 16px;
+    }
+    .subtitle {
+      margin-top: 5px;
+    }
+  }
+
+  .type-icon {
+    color: $stravaOrange;
+    width: 26px;
+    height: 26px;
+  }
+}

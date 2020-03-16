@@ -9,9 +9,9 @@ import _ from "lodash";
 import Loader from "../../components/Loader/Loader";
 
 const fetchLimit = 10;
-const sorter = (a, b) => b.timestamp - a.timestamp;
+const sorter = (a, b) => new Date(b.start_date) - new Date(a.start_date);
 
-const Row = memo(({ it }) => <StravaCard key={it.id} data={it} />);
+const Row = memo(data => <StravaCard {...data} />);
 
 const Strava = props => {
   const [loadingFeed, setLoadingFeed] = useState(false);
@@ -66,9 +66,7 @@ const Strava = props => {
             loading={loadingFeed}
             loader={<Loader />}
           >
-            {stateFeed.map(it => (
-              <Row key={it.id} it={it} />
-            ))}
+            {stateFeed.map(it => it && <Row {...it} key={it.id} />)}
           </InfiniteScroll>
         </div>
       )}

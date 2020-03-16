@@ -1,12 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./style.scss";
 import Loader from "../../components/Loader/Loader";
 import { Link } from "react-router-dom";
-import { ping } from "../../api/api";
+import { fetchDash } from "../../api/api";
+import { setDash } from "../../redux/actions/dash";
+import { connect } from "react-redux";
+import DashCenter from "./DashCenter";
 
-const Dashboard = () => {
+const Dashboard = props => {
+  const [loading, setLoading] = useState(false);
+  const [dashData, setDashData] = useState(props.dash.data || []);
+
+  const getDash = opts => {
+    if (loading) return;
+
+    setLoading(true);
+    fetchDash(opts)
+      .then(data => {
+        setDashData(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        setLoading(false);
+      });
+  };
+
   useEffect(() => {
-    ping();
+    getDash();
   }, []);
 
   return (
@@ -29,13 +49,17 @@ const Dashboard = () => {
           </footer> */}
         </div>
       </div>
-      {/* <Loader /> */}
-      <div className="coming-soon">
-        <h2>More coming soon!</h2>
-        <p>This website is under construction</p>
-      </div>
+      {loading && <Loader />}
+      {!loading && <DashCenter loading={loading} dashData={dashData} />}
     </div>
   );
 };
 
-export default Dashboard;
+export default connect(
+  state => ({
+    dash: state.dash || {}
+  }),
+  dispatch => ({
+    setDash: data => dispatch(setDash(data))
+  })
+)(Dashboard);

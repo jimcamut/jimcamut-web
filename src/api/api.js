@@ -66,3 +66,13 @@ export const fetchTweets = params => {
     });
   });
 };
+
+export const fetchDash = () => {
+  return new Promise((resolve, reject) => {
+    _req({ url: `${apiBase}/dash` }).then(res => {
+      const { status, data } = res || {};
+      if (status === 200) return resolve(data.result);
+      reject(res.data);
+    });
+  });
+};

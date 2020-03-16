@@ -1,0 +1,30 @@
+@import "../../assets/scss/colors.scss";
+
+.graph-container {
+  display: flex;
+  flex: 1 1;
+  align-items: center;
+  justify-content: center;
+
+  .chart {
+    width: 70% !important;
+  }
+
+  .arrow {
+    height: 100%;
+    display: flex;
+    flex: 1 1;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &.hide {
+      opacity: 0;
+    }
+
+    .icon {
+      font-size: 30px;
+      color: $stravaOrange;
+    }
+  }
+}
