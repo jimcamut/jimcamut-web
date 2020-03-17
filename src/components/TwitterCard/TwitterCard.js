@@ -52,7 +52,7 @@ const TwitterCard = memo(
       author === 'jimcamut' && publisher === 'Twitter' && description;
 
     try {
-      text = origText ? origText.replace('“', '').replce('”', '') : text || '';
+      text = (origText || text || '').replace(/^“/gi, '').replace(/”$/gi, '');
     } catch (e) {
       // console.log(e);
     }

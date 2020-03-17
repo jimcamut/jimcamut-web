@@ -8,7 +8,7 @@ import TwitterCard from '../../components/TwitterCard/TwitterCard';
 import { connect } from 'react-redux';
 import { setTweets } from '../../redux/actions/tweets';
 
-const sorter = (a, b) => b.created_at - a.created_at;
+const sorter = (a, b) => new Date(b.created_at) - new Date(a.created_at);
 const fetchLimit = 20;
 
 let Tweets = props => {
@@ -33,7 +33,6 @@ let Tweets = props => {
         let newData;
         if (feed.length) {
           newData = _.uniqBy(stateFeed.concat(feed), 'id').sort(sorter);
-          //props.setFeed(_.uniqBy(newData.slice(0, 10), "id"));
         }
         props.setTweets(_.uniqBy(newData.slice(0, fetchLimit), 'id'));
         setStateFeed(newData);
