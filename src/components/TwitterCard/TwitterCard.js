@@ -47,8 +47,12 @@ const TwitterCard = memo(
       ((entities || {}).media || []).find(m => m && m.media_url_https) || {}
     ).media_url_https;
 
+    const { author, publisher, description } = urlPreview || {};
+    const origText =
+      author === 'jimcamut' && publisher === 'Twitter' && description;
+
     try {
-      text = text || '';
+      text = origText || text || '';
     } catch (e) {
       // console.log(e);
     }
@@ -88,7 +92,7 @@ const TwitterCard = memo(
         }
         extra={
           <>
-            {urlPreview && <LinkPreview {...urlPreview} />}
+            {!origText && urlPreview && <LinkPreview {...urlPreview} />}
             {image && (
               <div className="img-container">
                 <img className="media" src={image} alt="twitter media" />

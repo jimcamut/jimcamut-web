@@ -36,7 +36,6 @@ const Grams = () => {
         setLoadingFeed(false);
 
         if (feed.length < (opts.limit || fetchLimit)) {
-          console.log('ENOUGHHHHH', feed.length, opts.limit, fetchLimit);
           setHasMore(false);
         }
       })
