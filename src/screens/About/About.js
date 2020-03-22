@@ -5,7 +5,15 @@ const About = () => {
   return (
     <div className="page-about">
       <div className="container">
-        <div class="inner">
+        <div className="inner">
+          <div className="section">
+            <h1>Coming Soon-ish?</h1>
+            <p>Writing your own bio is hard.</p>
+          </div>
+        </div>
+      </div>
+      {/* <div className="container">
+        <div className="inner">
           <div className="section">
             <h2>What do you want to know?</h2>
 
@@ -146,7 +154,7 @@ const About = () => {
             </p>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

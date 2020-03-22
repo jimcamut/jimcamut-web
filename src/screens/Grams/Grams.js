@@ -5,6 +5,7 @@ import { fetchGrams } from '../../api/api';
 import _ from 'lodash';
 import Loader from '../../components/Loader/Loader';
 import GramCard from '../../components/GramCard/GramCard';
+import Lightbox from '../../components/Lightbox/Lightbox';
 
 const sorter = (a, b) => b.timestamp - a.timestamp;
 const fetchLimit = 10;
@@ -13,6 +14,7 @@ const Grams = () => {
   const [loadingFeed, setLoadingFeed] = useState(false);
   const [stateFeed, setStateFeed] = useState(/*props.feed.data || */ []);
   const [hasMore, setHasMore] = useState(true);
+  const [lighboxIdx, setLighboxIdx] = useState(0);
 
   const getGramsFeed = opts => {
     if (loadingFeed) return;
@@ -50,28 +52,50 @@ const Grams = () => {
     });
   }, []);
 
+  const sources = stateFeed.length
+    ? stateFeed.map(it =>
+        (it.public_urls || []).find(
+          u => u && u.match(/original.jpg$|video.mp4$/)
+        )
+      )
+    : [];
+
   return (
-    <div className="page-grams">
-      <div
-        id="grams-scroll-cont"
-        className="scroll-container"
-        style={{ height: '100%', width: '100%', overflow: 'scroll' }}
-      >
-        <InfiniteScroll
-          dataLength={stateFeed.length}
-          next={() => getGramsFeed()}
-          hasMore={hasMore}
-          loading={loadingFeed}
-          scrollableTarget="grams-scroll-cont"
-          loader={<Loader />}
+    <>
+      <div className="page-grams">
+        <div
+          id="grams-scroll-cont"
+          className="scroll-container"
+          style={{ height: '100%', width: '100%', overflow: 'scroll' }}
         >
-          <div className="image-grid">
-            {stateFeed.length &&
-              stateFeed.map((data, idx) => <GramCard {...data} key={idx} />)}
-          </div>
-        </InfiniteScroll>
+          <InfiniteScroll
+            dataLength={stateFeed.length}
+            next={() => getGramsFeed()}
+            hasMore={hasMore}
+            loading={loadingFeed}
+            scrollableTarget="grams-scroll-cont"
+            loader={<Loader />}
+          >
+            <div className="image-grid">
+              {stateFeed.length &&
+                stateFeed.map((data, idx) => (
+                  <GramCard
+                    {...data}
+                    key={idx}
+                    onClick={() => setLighboxIdx(idx + 1)}
+                  />
+                ))}
+            </div>
+          </InfiniteScroll>
+        </div>
       </div>
-    </div>
+      <Lightbox
+        index={lighboxIdx}
+        sources={sources}
+        close={() => setLighboxIdx(0)}
+        setIndex={n => setLighboxIdx(n)}
+      />
+    </>
   );
 };
 

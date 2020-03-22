@@ -20,4 +20,13 @@
     height: 100%;
     object-fit: cover;
   }
+
+  .gram-card {
+    &.clickable {
+      cursor: pointer;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
 }

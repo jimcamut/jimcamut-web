@@ -8,7 +8,7 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 
 const tz = 'America/Los_Angeles';
 
-const WeekGraph = ({ week, type = 'Run', toggleWeek, weekIdx }) => {
+const WeekGraph = ({ week, type = 'Run', toggleWeek, isFirst, isLast }) => {
   if (!week) return null;
   const { week_start, week_miles, week_seconds = 0, week_daily } = week || {};
   const weekSet = week_daily || [null, null, null, null, null, null, null];
@@ -57,14 +57,14 @@ const WeekGraph = ({ week, type = 'Run', toggleWeek, weekIdx }) => {
       content={
         <div className="graph-container">
           <div
-            className={`arrow${weekIdx < 1 ? ' hide' : ''}`}
+            className={`arrow${isFirst ? ' hide' : ''}`}
             onClick={() => toggleWeek(true)}
           >
             <MdKeyboardArrowLeft className="icon" />
           </div>
           <Graph weekSet={weekSet} title={title} max={max} />
           <div
-            className={`arrow${weekIdx > 2 ? ' hide' : ''}`}
+            className={`arrow${isLast ? ' hide' : ''}`}
             onClick={() => toggleWeek(false)}
           >
             <MdKeyboardArrowRight className="icon" />
@@ -75,21 +75,30 @@ const WeekGraph = ({ week, type = 'Run', toggleWeek, weekIdx }) => {
   );
 };
 
-const Workouts = memo(({ run_month, bike_month }) => {
-  if (!run_month) return null;
-  const [weekIdx, setWeekIdx] = useState(3);
-  const set = run_month;
+const Workouts = memo(({ run_weeks, bike_weeks }) => {
+  if (!run_weeks) return null;
+  const len = (run_weeks || []).length;
+  const [weekIdx, setWeekIdx] = useState(len - 1);
+  const set = run_weeks;
   const week = set[weekIdx];
 
   if (!week) return null;
 
   const toggleWeek = back => {
     const newIdx = back ? weekIdx - 1 : weekIdx + 1;
-    if (newIdx < 0 || newIdx > 3) return;
+    if (newIdx < 0 || newIdx > len - 1) return;
     setWeekIdx(newIdx);
   };
 
-  return <WeekGraph week={week} toggleWeek={toggleWeek} weekIdx={weekIdx} />;
+  return (
+    <WeekGraph
+      week={week}
+      toggleWeek={toggleWeek}
+      weekIdx={weekIdx}
+      isFirst={weekIdx === 0}
+      isLast={weekIdx === len - 1}
+    />
+  );
 });
 
 export default Workouts;
