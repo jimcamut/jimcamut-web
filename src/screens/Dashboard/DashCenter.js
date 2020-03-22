@@ -10,12 +10,12 @@ import Card from '../../components/Card/Card';
 const DashCenter = props => {
   const { dashData } = props || {};
   const data = dashData || {};
-  const { run_month, bike_month, tweet, strava, gram } = data || {};
+  const { run_weeks, bike_weeks, tweet, strava, gram } = data || {};
   return (
     <div className="dashcenter">
       <div className="flex-grid-halfs">
         <div className="col">
-          <Workouts run_month={run_month} bike_month={bike_month} />
+          <Workouts run_weeks={run_weeks} bike_weeks={bike_weeks} />
           <Link to="strava">See More Strava</Link>
         </div>
         {strava && (
