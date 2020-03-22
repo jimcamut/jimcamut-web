@@ -77,7 +77,7 @@ const Grams = () => {
             loader={<Loader />}
           >
             <div className="image-grid">
-              {stateFeed.length &&
+              {stateFeed.length > 0 &&
                 stateFeed.map((data, idx) => (
                   <GramCard
                     {...data}

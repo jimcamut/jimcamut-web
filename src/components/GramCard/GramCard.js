@@ -2,9 +2,11 @@ import React from 'react';
 import './style.scss';
 
 const GramCard = ({ id, media_url, media_type, public_urls, onClick }) => {
-  const src =
+  const src = (
     (public_urls || []).find(it => it && it.match(/760x760.jpg$|video.mp4$/)) ||
-    media_url;
+    media_url ||
+    ''
+  ).replace('jimcamut-ig.s3.amazonaws.com', 'd1yq900l6wf9lh.cloudfront.net');
 
   return (
     <div
