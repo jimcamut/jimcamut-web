@@ -1,21 +1,23 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
 
-import User from "./user";
-import MetaReducer from "./meta";
-import StravaReducer from "./strava";
-import TweetsReducer from "./tweets";
-import DashReducer from "./dash";
+import User from './user';
+import MetaReducer from './meta';
+import StravaReducer from './strava';
+import TweetsReducer from './tweets';
+import DashReducer from './dash';
+import GramsReducer from './grams';
 
 const AppReducer = combineReducers({
   user: User,
   meta: MetaReducer,
   strava: StravaReducer,
   tweets: TweetsReducer,
-  dash: DashReducer
+  dash: DashReducer,
+  grams: GramsReducer
 });
 
 const RootReducer = (state, action) => {
-  if (action.type === "LOGOUT") {
+  if (action.type === 'LOGOUT') {
     state = undefined;
   }
 
