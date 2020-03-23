@@ -6,13 +6,15 @@ import _ from 'lodash';
 import Loader from '../../components/Loader/Loader';
 import GramCard from '../../components/GramCard/GramCard';
 import Lightbox from '../../components/Lightbox/Lightbox';
+import { setGrams } from '../../redux/actions/grams';
+import { connect } from 'react-redux';
 
 const sorter = (a, b) => b.timestamp - a.timestamp;
-const fetchLimit = 10;
+const fetchLimit = 16;
 
-const Grams = () => {
+const Grams = props => {
   const [loadingFeed, setLoadingFeed] = useState(false);
-  const [stateFeed, setStateFeed] = useState(/*props.feed.data || */ []);
+  const [stateFeed, setStateFeed] = useState(props.grams.data || []);
   const [hasMore, setHasMore] = useState(true);
   const [lighboxIdx, setLighboxIdx] = useState(0);
 
@@ -32,7 +34,7 @@ const Grams = () => {
         let newData;
         if (feed.length) {
           newData = _.uniqBy(stateFeed.concat(feed), 'id').sort(sorter);
-          //props.setFeed(_.uniqBy(newData.slice(0, 10), "id"));
+          props.setGrams(_.uniqBy(newData.slice(0, fetchLimit), 'id'));
         }
         setStateFeed(newData);
         setLoadingFeed(false);
@@ -99,4 +101,11 @@ const Grams = () => {
   );
 };
 
-export default Grams;
+export default connect(
+  state => ({
+    grams: state.grams || {}
+  }),
+  dispatch => ({
+    setGrams: data => dispatch(setGrams(data))
+  })
+)(Grams);
