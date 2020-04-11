@@ -13,7 +13,9 @@ const fetchLimit = 20;
 
 let Tweets = props => {
   const [loadingFeed, setLoadingFeed] = useState(false);
-  const [stateFeed, setStateFeed] = useState(props.tweets.data || []);
+  const [stateFeed, setStateFeed] = useState(
+    (props.tweets.data || []).sort(sorter)
+  );
   const [hasMore, setHasMore] = useState(true);
 
   const getTweetsFeed = opts => {

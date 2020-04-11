@@ -15,7 +15,9 @@ const Row = memo(data => <StravaCard {...data} />);
 
 const Strava = props => {
   const [loadingFeed, setLoadingFeed] = useState(false);
-  const [stateFeed, setStateFeed] = useState(props.strava.data || []);
+  const [stateFeed, setStateFeed] = useState(
+    (props.strava.data || []).sort(sorter)
+  );
   const [hasMore, setHasMore] = useState(true);
 
   const getStravaFeed = opts => {
