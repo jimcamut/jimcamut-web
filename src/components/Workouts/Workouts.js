@@ -11,7 +11,7 @@ const tz = 'America/Los_Angeles';
 const whichHasMore = (run_weeks, bike_weeks) => {
   const len = (run_weeks || bike_weeks || []).length;
   const getCount = arr =>
-    (((arr || [])[len - 1] || {}).week_daily || {}).filter(it => it).length;
+    (((arr || [])[len - 1] || {}).week_daily || []).filter(it => it).length;
   const runCount = getCount(run_weeks);
   const rideCount = getCount(bike_weeks);
   return runCount >= rideCount ? 'Run' : 'Ride';
