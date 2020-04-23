@@ -1,4 +1,4 @@
-@import "../../../assets/scss/colors.scss";
+@import '../../../assets/scss/colors.scss';
 
 .stat-container {
   margin: 30px 0 10px;
@@ -32,5 +32,23 @@
     color: $stravaOrange;
     width: 26px;
     height: 26px;
+  }
+
+  .stat-item .select-type {
+    .type-icon {
+      cursor: pointer;
+      color: #fff;
+      opacity: 0.12;
+      margin: 0 2px;
+      &.active {
+        color: $stravaOrange;
+        opacity: 1;
+      }
+      &:not(.active):hover {
+        opacity: 0.5;
+        color: $stravaOrange;
+        // opacity: 1;
+      }
+    }
   }
 }

@@ -1,10 +1,10 @@
-import React, { memo } from "react";
-import "./style.scss";
-import moment from "moment-timezone";
-import CacheImage from "../CacheImage/CacheImage";
-import { cacheImages, getGoogleImg, getStravaImg } from "./constants";
-import Card from "../Card/Card";
-import StatContainer from "./StatContainer/StatContainer";
+import React, { memo } from 'react';
+import './style.scss';
+import moment from 'moment-timezone';
+import CacheImage from '../CacheImage/CacheImage';
+import { cacheImages, getGoogleImg, getStravaImg } from './constants';
+import Card from '../Card/Card';
+import StatContainer from './StatContainer/StatContainer';
 
 const StravaCard = props => {
   const { name, type, map, start_date, distance, moving_time } = props || {};
@@ -13,17 +13,17 @@ const StravaCard = props => {
   const miles = 0.000621371192237 * distance;
   const mph = miles / (moving_time / 60 / 60);
   const duration = moment
-    .utc(moment.duration(moving_time, "seconds").asMilliseconds())
-    .format("H [hr] m [min]")
-    .replace("0 hr ", "");
+    .utc(moment.duration(moving_time, 'seconds').asMilliseconds())
+    .format('H [hr] m [min]')
+    .replace('0 hr ', '');
 
   const minPerMile = moving_time / 60 / miles;
-  const paceType = type === "Run" ? "Per mile" : "MPH";
+  const paceType = type === 'Run' ? 'Per mile' : 'MPH';
   const pace =
-    type === "Run"
+    type === 'Run'
       ? moment
-          .utc(moment.duration(minPerMile, "minutes").asMilliseconds())
-          .format("m:ss")
+          .utc(moment.duration(minPerMile, 'minutes').asMilliseconds())
+          .format('m:ss')
       : mph.toFixed(2);
 
   const src = getStravaImg({ poly: map.summary_polyline });
@@ -32,7 +32,7 @@ const StravaCard = props => {
 
   const onMapError = (src, id) => {
     const isMapbox = src.match(/mapbox/gi);
-    let newUrl = "";
+    let newUrl = '';
     if (isMapbox) {
       newUrl = getGoogleImg({ poly: map.summary_polyline });
     }
@@ -46,7 +46,7 @@ const StravaCard = props => {
       title={name}
       subtitle={moment
         .tz(new Date(start_date), tz)
-        .format("MMM DD, YYYY h:mm a z")}
+        .format('MMM DD, YYYY h:mm a z')}
       topExtra={
         <StatContainer
           type={type}
