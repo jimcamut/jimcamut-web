@@ -1,13 +1,22 @@
-import React, { memo } from "react";
-import "./style.scss";
+import React, { memo } from 'react';
+import './style.scss';
 
 const Card = memo(props => {
-  const { className, title, subtitle, thumb, topExtra, content, style, extra } =
-    props || {};
+  const {
+    className,
+    title,
+    subtitle,
+    thumb,
+    topExtra,
+    topRight,
+    content,
+    style,
+    extra
+  } = props || {};
   const showTitle = title || subtitle || thumb;
   return (
     <div
-      className={`card${className ? " " + className : ""}`}
+      className={`card${className ? ' ' + className : ''}`}
       style={style || {}}
     >
       <div className="top">
@@ -27,6 +36,7 @@ const Card = memo(props => {
                 {title && <h3 className="title">{title}</h3>}
                 {subtitle && <p className="subtitle">{subtitle}</p>}
               </div>
+              {topRight}
             </div>
             {topExtra}
           </>

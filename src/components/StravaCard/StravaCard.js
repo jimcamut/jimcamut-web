@@ -5,9 +5,19 @@ import CacheImage from '../CacheImage/CacheImage';
 import { cacheImages, getGoogleImg, getStravaImg } from './constants';
 import Card from '../Card/Card';
 import StatContainer from './StatContainer/StatContainer';
+import TopRight from './TopRight';
 
 const StravaCard = props => {
-  const { name, type, map, start_date, distance, moving_time } = props || {};
+  const {
+    name,
+    type,
+    map,
+    start_date,
+    distance,
+    moving_time,
+    photos,
+    description
+  } = props || {};
   if (!map) return null;
   const tz = moment.tz.guess();
   const miles = 0.000621371192237 * distance;
@@ -39,11 +49,14 @@ const StravaCard = props => {
     document.getElementById(id).src = newUrl;
   };
 
+  const images = (photos || {}).all || [];
+
   return (
     <Card
       className="strava-card"
       thumb="https://dgalywyr863hv.cloudfront.net/pictures/athletes/802863/634527/2/medium.jpg"
       title={name}
+      topRight={<TopRight images={images} />}
       subtitle={moment
         .tz(new Date(start_date), tz)
         .format('MMM DD, YYYY h:mm a z')}
@@ -54,6 +67,8 @@ const StravaCard = props => {
           duration={duration}
           pace={pace}
           paceType={paceType}
+          description={description}
+          images={images}
         />
       }
       content={

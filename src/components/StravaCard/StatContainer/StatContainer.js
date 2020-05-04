@@ -8,45 +8,59 @@ const StatContainer = ({
   duration,
   pace,
   paceType,
-  toggleActivity
-}) => (
-  <div className="stat-container">
-    {toggleActivity && (
-      <div className="stat-item select-type">
-        <div className="select-type">
-          <MdDirectionsRun
-            className={`icon type-icon${type === 'Run' ? ' active' : ''}`}
-            onClick={() => toggleActivity('Run')}
-          />
+  toggleActivity,
+  description
+}) => {
+  const hasDetails = description && description !== '';
 
-          <MdDirectionsBike
-            className={`icon type-icon${type === 'Ride' ? ' active' : ''}`}
-            onClick={() => toggleActivity('Ride')}
-          />
+  return (
+    <>
+      <div className="stat-container">
+        {toggleActivity && (
+          <div className="stat-item select-type">
+            <div className="select-type">
+              <MdDirectionsRun
+                className={`icon type-icon${type === 'Run' ? ' active' : ''}`}
+                onClick={() => toggleActivity('Run')}
+              />
+
+              <MdDirectionsBike
+                className={`icon type-icon${type === 'Ride' ? ' active' : ''}`}
+                onClick={() => toggleActivity('Ride')}
+              />
+            </div>
+            <span className="subtitle">{type}s</span>
+          </div>
+        )}
+        {!toggleActivity && (
+          <div className="stat-item">
+            {type === 'Run' && <MdDirectionsRun className="icon type-icon" />}
+            {type === 'Ride' && <MdDirectionsBike className="icon type-icon" />}
+            <span className="subtitle">{type}</span>
+          </div>
+        )}
+        <div className="stat-item">
+          <span className="value">{miles.toFixed(2)}</span>
+          <span className="subtitle">Miles</span>
         </div>
-        <span className="subtitle">{type}s</span>
+        <div className="stat-item">
+          <span className="value">{duration}</span>
+          <span className="subtitle">Duration</span>
+        </div>
+        <div className="stat-item">
+          <span className="value">
+            {pace === 'NaN' || pace === 'Invalid date' ? '0' : pace}
+          </span>
+          <span className="subtitle">{paceType}</span>
+        </div>
       </div>
-    )}
-    {!toggleActivity && (
-      <div className="stat-item">
-        {type === 'Run' && <MdDirectionsRun className="icon type-icon" />}
-        {type === 'Ride' && <MdDirectionsBike className="icon type-icon" />}
-        <span className="subtitle">{type}</span>
-      </div>
-    )}
-    <div className="stat-item">
-      <span className="value">{miles.toFixed(2)}</span>
-      <span className="subtitle">Miles</span>
-    </div>
-    <div className="stat-item">
-      <span className="value">{duration}</span>
-      <span className="subtitle">Duration</span>
-    </div>
-    <div className="stat-item">
-      <span className="value">{pace === 'NaN' ? '0' : pace}</span>
-      <span className="subtitle">{paceType}</span>
-    </div>
-  </div>
-);
+      {hasDetails && (
+        <div className="details-container">
+          {description && description !== '' && <p>{description}</p>}
+        </div>
+      )}
+    </>
+  );
+};
 
 export default StatContainer;

@@ -3,4 +3,26 @@
     width: 100%;
     height: auto;
   }
+
+  .images-container {
+    max-width: 50%;
+    float: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    //flex-flow: row-reverse;
+    flex-direction: row;
+
+    img {
+      float: right;
+      width: auto;
+      height: 60px;
+      margin-left: 10px;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+      &:hover {
+        opacity: 0.75;
+      }
+    }
+  }
 }
