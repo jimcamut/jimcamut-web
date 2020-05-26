@@ -9,6 +9,7 @@ import About from '../screens/About/About';
 import Strava from '../screens/Strava/Strava';
 import Grams from '../screens/Grams/Grams';
 import Tweets from '../screens/Tweets/Tweets';
+import Login from '../screens/Login/Login';
 import ReactGA from 'react-ga';
 
 const trackGA = location => {
@@ -86,8 +87,8 @@ const Routes = props => {
       <Route {...data} path="/strava" exact component={Strava} />
       <Route {...data} path="/grams" exact component={Grams} />
       <Route {...data} path="/tweets" exact component={Tweets} />
-      {/* <Route {...data} path="/login" component={Login} />
-        <PrivateRoute {...data} path="/dashboard" component={Dashboard} /> */}
+      <Route {...data} path="/login" component={Login} />
+      {/* <PrivateRoute {...data} path="/dashboard" component={Dashboard} /> */}
       <Redirect to="/" />
     </Switch>
   );

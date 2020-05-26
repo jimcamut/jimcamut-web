@@ -1,6 +1,9 @@
 @import-normalize;
 
-@import "../colors.scss";
+// Plugin Imports
+@import '~antd/dist/antd.css';
+
+@import '../colors.scss';
 
 * {
   box-sizing: border-box;
@@ -8,15 +11,15 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
@@ -42,4 +45,19 @@ a {
     line-height: 1.6;
     font-weight: 300;
   }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: $blue2;
+}
+
+p,
+ul {
+  //font-family: Georgia, 'Times New Roman', Times, serif;
+  line-height: 1.6;
 }

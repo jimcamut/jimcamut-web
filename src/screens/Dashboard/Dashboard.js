@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './style.scss';
 import Loader from '../../components/Loader/Loader';
 import { Link } from 'react-router-dom';
-import { fetchDash } from '../../api/api';
+import api from '../../api/api';
 import { setDash } from '../../redux/actions/dash';
 import { connect } from 'react-redux';
 import DashCenter from './DashCenter';
@@ -15,7 +15,8 @@ const Dashboard = props => {
     if (loading) return;
 
     setLoading(true);
-    fetchDash(opts)
+    api.dash
+      .fetchDash(opts)
       .then(data => {
         props.setDash(data);
         setDashData(data);

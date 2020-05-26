@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './style.scss';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { fetchGrams } from '../../api/api';
+import api from '../../api/api';
 import _ from 'lodash';
 import Loader from '../../components/Loader/Loader';
 import GramCard from '../../components/GramCard/GramCard';
@@ -32,9 +32,9 @@ const Grams = props => {
     };
 
     setLoadingFeed(true);
-    fetchGrams(opts)
+    api.grams
+      .fetchGrams(opts)
       .then(feed => {
-        console.log(feed);
         let newData;
         if (feed.length) {
           newData = _.uniqBy(stateFeed.concat(feed), 'id').sort(sorter);

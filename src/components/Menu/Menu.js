@@ -1,9 +1,9 @@
-import React from "react";
-import "./style.scss";
-import LogoPortrait from "../Logos/LogoPortrait";
-import { FaGithub, FaStrava, FaInstagram, FaLinkedin } from "react-icons/fa";
-import { FiUser, FiTwitter, FiLock } from "react-icons/fi";
-import { NavLink } from "react-router-dom";
+import React from 'react';
+import './style.scss';
+import LogoPortrait from '../Logos/LogoPortrait';
+import { FaGithub, FaStrava, FaInstagram, FaLinkedin } from 'react-icons/fa';
+import { FiUser, FiTwitter, FiLock } from 'react-icons/fi';
+import { NavLink } from 'react-router-dom';
 
 const NavItem = ({ to, icon, label, ext }) => {
   const labelTxt = label || to;
@@ -70,7 +70,7 @@ const Menu = () => {
             icon={<FaLinkedin />}
             ext
           />
-          <NavItem exact label="Private" to="private-login" icon={<FiLock />} />
+          <NavItem exact label="Private" to="login" icon={<FiLock />} />
         </ul>
       </div>
     </div>
