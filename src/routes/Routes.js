@@ -10,7 +10,10 @@ import Strava from '../screens/Strava/Strava';
 import Grams from '../screens/Grams/Grams';
 import Tweets from '../screens/Tweets/Tweets';
 import Login from '../screens/Login/Login';
+import Register from '../screens/Register/Register';
 import ReactGA from 'react-ga';
+import RecoverPassword from '../screens/RecoverPassword/RecoverPassword';
+import UpdatePassword from '../screens/UpdatePassword/UpdatePassword';
 
 const trackGA = location => {
   const page = location && location.pathname;
@@ -88,6 +91,10 @@ const Routes = props => {
       <Route {...data} path="/grams" exact component={Grams} />
       <Route {...data} path="/tweets" exact component={Tweets} />
       <Route {...data} path="/login" component={Login} />
+      <Route {...data} path="/register" component={Register} />
+      <Route {...data} path="/recover-password" component={RecoverPassword} />
+      <Route {...data} path="/update-password" component={UpdatePassword} />
+
       {/* <PrivateRoute {...data} path="/dashboard" component={Dashboard} /> */}
       <Redirect to="/" />
     </Switch>

@@ -3,17 +3,15 @@ import { connect } from 'react-redux';
 import { setUser } from '../../redux/actions/user';
 import Form from '../Form/Form';
 import InputGroup from '../Form/InputGroup';
+import { notification } from 'antd';
+import api from '../../api/api';
+import { getURLParamsValue } from '../../utils/utils';
 
 const defaultFormData = {
-  pin: '',
-  first_name: '',
-  last_name: '',
-  email: '',
-  password: '',
-  confirmPass: ''
+  email: ''
 };
 
-const RegisterForm = props => {
+const RecoverPasswordForm = props => {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState(defaultFormData);
 
@@ -24,6 +22,31 @@ const RegisterForm = props => {
 
   const onSubmit = e => {
     e.preventDefault();
+    const { email } = formData;
+
+    setLoading(true);
+
+    api.users
+      .recoverPassword({ email })
+      .then(res => {
+        console.log(res);
+        setLoading(false);
+        notification.success({
+          message: 'Success!',
+          description: res.message
+        });
+
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+        setLoading(false);
+        notification.error({
+          message: 'Error',
+          description:
+            (err && err.data && err.data.message) || 'Could not submit'
+        });
+      });
     return;
   };
 
@@ -36,40 +59,13 @@ const RegisterForm = props => {
 
   return (
     <Form
-      className="registration-form"
-      submitText="Register"
+      className="recover-password-form"
+      submitText="Submit"
       onSubmit={onSubmit}
       style={props.style}
       loading={loading}
     >
-      <InputGroup
-        label="Pin Number"
-        formKey="pin"
-        type="phone"
-        maxLength="6"
-        pattern="\d{6}"
-        after={
-          <span style={{ fontSize: 12, marginTop: 10 }}>
-            You must have a valid pin number to register
-          </span>
-        }
-        {...inputProps}
-      />
-      <InputGroup label="First Name" formKey="first_name" {...inputProps} />
-      <InputGroup label="Last Name" formKey="last_name" {...inputProps} />
       <InputGroup label="Email" formKey="email" type="email" {...inputProps} />
-      <InputGroup
-        label="Password"
-        formKey="password"
-        type="password"
-        {...inputProps}
-      />
-      <InputGroup
-        label="Confirm Password"
-        formKey="confirmPass"
-        type="password"
-        {...inputProps}
-      />
     </Form>
   );
 };
@@ -81,4 +77,4 @@ export default connect(
   dispatch => ({
     setUser: data => dispatch(setUser(data))
   })
-)(RegisterForm);
+)(RecoverPasswordForm);

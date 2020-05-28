@@ -58,3 +58,27 @@ export const register = data => {
       .catch(e => reject(e.response));
   });
 };
+
+export const resetPassword = data => {
+  return new Promise((resolve, reject) => {
+    req({ url: `${base}/users/reset-password`, method: 'post', data })
+      .then(res => {
+        const { status, data, result } = res || {};
+        if (status === 200) return resolve(result);
+        reject(data);
+      })
+      .catch(e => reject(e.response));
+  });
+};
+
+export const recoverPassword = data => {
+  return new Promise((resolve, reject) => {
+    req({ url: `${base}/users/recover-password`, method: 'post', data })
+      .then(res => {
+        const { status, data } = res || {};
+        if (status === 200) return resolve(data || {});
+        reject(data);
+      })
+      .catch(e => reject(e.response));
+  });
+};

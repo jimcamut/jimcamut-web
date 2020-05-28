@@ -1,5 +1,6 @@
 import React from 'react';
 import './style.scss';
+import Button from '../Button/Button';
 
 const Form = props => (
   <form
@@ -10,15 +11,12 @@ const Form = props => (
   >
     {props.children}
     <div className="input-group">
-      <button
-        className={(props.loading && ' loading') || ''}
-        disabled={props.loading}
-        type="submit"
-        name="submit"
+      <Button
+        isForm
+        loading={props.loading}
         onClick={props.onSubmit}
-      >
-        {props.submitText || 'Submit'}
-      </button>
+        text={props.submitText}
+      />
     </div>
   </form>
 );

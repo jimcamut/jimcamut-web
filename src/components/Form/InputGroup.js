@@ -8,9 +8,12 @@ const InputGroup = ({
   pattern,
   update,
   getValue,
-  error
+  error,
+  before,
+  after
 }) => (
   <div className="input-group">
+    {before}
     <label htmlFor={formKey}>{label}</label>
     <input
       type={type}
@@ -21,6 +24,7 @@ const InputGroup = ({
       pattern={pattern}
     />
     {error && error !== '' && <p className="error">{error}</p>}
+    {after}
   </div>
 );
 export default InputGroup;

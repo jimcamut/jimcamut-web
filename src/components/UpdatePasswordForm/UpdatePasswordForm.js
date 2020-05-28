@@ -3,19 +3,22 @@ import { connect } from 'react-redux';
 import { setUser } from '../../redux/actions/user';
 import Form from '../Form/Form';
 import InputGroup from '../Form/InputGroup';
+import { notification } from 'antd';
+import api from '../../api/api';
+import { getURLParamsValue } from '../../utils/utils';
+import { useHistory } from 'react-router-dom';
 
 const defaultFormData = {
-  pin: '',
-  first_name: '',
-  last_name: '',
-  email: '',
   password: '',
   confirmPass: ''
 };
 
-const RegisterForm = props => {
+const UpdatePasswordForm = props => {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState(defaultFormData);
+
+  let history = useHistory();
+  const goToLogin = () => history.push('/login');
 
   const setFormDataWrapper = (key, value) => {
     const newFormData = Object.assign({}, formData, { [key]: value });
@@ -24,6 +27,39 @@ const RegisterForm = props => {
 
   const onSubmit = e => {
     e.preventDefault();
+    const { password, confirmPass } = formData;
+    if (password !== confirmPass) {
+      return notification.error({
+        message: 'Error',
+        description: 'Your passwords do not match'
+      });
+    }
+
+    const token = getURLParamsValue('token');
+
+    setLoading(true);
+
+    api.users
+      .resetPassword({ password, token })
+      .then(res => {
+        console.log(res);
+        setLoading(false);
+        notification.success({
+          message: 'Success!',
+          description: 'Your password was updated'
+        });
+
+        setFormData(defaultFormData);
+        goToLogin();
+      })
+      .catch(err => {
+        console.log(err);
+        setLoading(false);
+        notification.error({
+          message: 'Error',
+          description: (err && err.data && err.data.message) || 'Could submit'
+        });
+      });
     return;
   };
 
@@ -36,28 +72,12 @@ const RegisterForm = props => {
 
   return (
     <Form
-      className="registration-form"
-      submitText="Register"
+      className="change-password-form"
+      submitText="Update"
       onSubmit={onSubmit}
       style={props.style}
       loading={loading}
     >
-      <InputGroup
-        label="Pin Number"
-        formKey="pin"
-        type="phone"
-        maxLength="6"
-        pattern="\d{6}"
-        after={
-          <span style={{ fontSize: 12, marginTop: 10 }}>
-            You must have a valid pin number to register
-          </span>
-        }
-        {...inputProps}
-      />
-      <InputGroup label="First Name" formKey="first_name" {...inputProps} />
-      <InputGroup label="Last Name" formKey="last_name" {...inputProps} />
-      <InputGroup label="Email" formKey="email" type="email" {...inputProps} />
       <InputGroup
         label="Password"
         formKey="password"
@@ -81,4 +101,4 @@ export default connect(
   dispatch => ({
     setUser: data => dispatch(setUser(data))
   })
-)(RegisterForm);
+)(UpdatePasswordForm);

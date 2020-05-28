@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import LoggedOut from './LoggedOut';
-import LoggedIn from './LoggedIn';
 import api from '../../api/api';
 import { setUser } from '../../redux/actions/user';
+import LoginForm from '../../components/LoginForm/LoginForm';
+import { Link } from 'react-router-dom';
+import Button from '../../components/Button/Button';
 
 const Login = props => {
-  const [loading, setLoading] = useState(false);
-  const [mode, setMode] = useState('login');
-
+  const [loadingLogout, setLoadingLogout] = useState(false);
   useEffect(() => {
     if (!props.user.sessionToken) {
       api.users
@@ -21,7 +20,23 @@ const Login = props => {
     }
   }, [props.user]);
 
-  console.log('USER RENDERED', props.user);
+  const logout = () => {
+    console.log('LOGGIN OTU');
+    setLoadingLogout(true);
+    api.users
+      .logout()
+      .catch(err => {
+        console.log(err);
+        setLoadingLogout(false);
+      })
+      .then(res => {
+        if (loadingLogout) {
+          setLoadingLogout(false);
+        }
+        console.log(res);
+        props.setUser(null);
+      });
+  };
 
   return (
     <>
@@ -44,10 +59,19 @@ const Login = props => {
             flexDirection: 'column'
           }}
         >
-          {props.user.sessionToken ? (
-            <LoggedIn />
+          {props.user && props.user.sessionToken ? (
+            <Button onClick={logout} loading={loadingLogout} text="Log Out" />
           ) : (
-            <LoggedOut mode={mode} setMode={setMode} />
+            <>
+              <h1>Login</h1>
+              <LoginForm />
+              <p>
+                <Link to="/register">Register</Link> if you've been given a pin
+              </p>
+              <p>
+                <Link to="/recover-password">Lost password?</Link>
+              </p>
+            </>
           )}
         </div>
       </div>
