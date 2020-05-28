@@ -63,8 +63,8 @@ export const resetPassword = data => {
   return new Promise((resolve, reject) => {
     req({ url: `${base}/users/reset-password`, method: 'post', data })
       .then(res => {
-        const { status, data, result } = res || {};
-        if (status === 200) return resolve(result);
+        const { status, data } = res || {};
+        if (status === 200) return resolve(data || {});
         reject(data);
       })
       .catch(e => reject(e.response));

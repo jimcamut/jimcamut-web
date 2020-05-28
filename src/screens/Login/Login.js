@@ -21,7 +21,6 @@ const Login = props => {
   }, [props.user]);
 
   const logout = () => {
-    console.log('LOGGIN OTU');
     setLoadingLogout(true);
     api.users
       .logout()

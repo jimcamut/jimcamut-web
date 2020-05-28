@@ -1,5 +1,6 @@
 import axios from 'axios';
 import ConfigureStore from '../redux';
+
 const { store } = ConfigureStore();
 const { REACT_APP_API_URL, REACT_APP_API_VERSION } = process.env;
 

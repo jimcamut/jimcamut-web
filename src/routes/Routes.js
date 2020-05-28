@@ -1,8 +1,7 @@
 import React, { useLayoutEffect } from 'react';
 import { Route, Redirect, withRouter, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-//import PrivateRoute from './PrivateRoute';
-import { getURLParams /*, parseError */ } from '../utils/utils';
+import PrivateRoute from './PrivateRoute';
 
 import Dashboard from '../screens/Dashboard/Dashboard';
 import About from '../screens/About/About';
@@ -14,6 +13,7 @@ import Register from '../screens/Register/Register';
 import ReactGA from 'react-ga';
 import RecoverPassword from '../screens/RecoverPassword/RecoverPassword';
 import UpdatePassword from '../screens/UpdatePassword/UpdatePassword';
+import Account from '../screens/Account/Account';
 
 const trackGA = location => {
   const page = location && location.pathname;
@@ -32,16 +32,7 @@ const Routes = props => {
 
   // Add "isAuthenticated" to props for PrivateRoute
   const isAuthenticated = !!sessionToken;
-  const data = Object.assign({}, props, {
-    isAuthenticated
-  });
-  let token;
-
-  try {
-    const urlParams = getURLParams() || [];
-    token = ((urlParams || []).find(it => it && it.key === 'session') || {})
-      .value;
-  } catch (e) {}
+  const data = Object.assign({}, props, { isAuthenticated });
 
   // const hideToken = () => {
   //   window.history.replaceState(
@@ -51,36 +42,19 @@ const Routes = props => {
   //   );
   // };
 
-  // Enable Ability to assume session
-  if (token) {
-    // const tokenMatch = sessionToken === token;
-    // const preLogin = () => (tokenMatch ? Promise.resolve() : API.logout());
-    // preLogin()
-    //   .catch(() => null)
-    //   .then(() => API.loginAndSet({ token: token }))
-    //   .then(hideToken)
-    //   .catch(err => {
-    //     hideToken();
-    //     notification.error({
-    //       message: "Error",
-    //       description: parseError(err)
-    //     });
-    //   });
-  }
-
   // Don't make the user login again
   if (
     isAuthenticated &&
-    ['/', '/register', '/login'].includes(props.location.pathname)
+    ['/register', '/login'].includes(props.location.pathname)
   ) {
-    // return (
-    //   <Redirect
-    //     to={{
-    //       pathname: "/dashboard",
-    //       state: { from: props.location }
-    //     }}
-    //   />
-    // );
+    return (
+      <Redirect
+        to={{
+          pathname: '/account',
+          state: { from: props.location }
+        }}
+      />
+    );
   }
 
   return (
@@ -94,8 +68,7 @@ const Routes = props => {
       <Route {...data} path="/register" component={Register} />
       <Route {...data} path="/recover-password" component={RecoverPassword} />
       <Route {...data} path="/update-password" component={UpdatePassword} />
-
-      {/* <PrivateRoute {...data} path="/dashboard" component={Dashboard} /> */}
+      <PrivateRoute {...data} path="/account" component={Account} />
       <Redirect to="/" />
     </Switch>
   );
