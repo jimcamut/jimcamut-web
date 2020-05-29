@@ -61,7 +61,7 @@ const Lightbox = ({ sources, index = 0, close, setIndex }) => {
   if (!(sources && sources.length && sources[index - 1])) return null;
 
   return (
-    <div className={`lightbox${src ? ' ' + 'active' : ''}`}>
+    <div className={`lightbox${src ? ' active' : ''}`}>
       <div className="backdrop" onClick={closeWrapper}></div>
       {loading && !isVideo && <Loader />}
       {src && !isVideo && (

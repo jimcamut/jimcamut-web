@@ -8,9 +8,9 @@ export const login = ({ email, password }) => {
       data: { email, password }
     })
       .then(res => {
-        console.log('LOGIN RES1', res);
         const { status, data } = res || {};
-        if (status === 200) return resolve(data.result);
+        const { result } = data || {};
+        if (status === 200) return resolve(result);
         reject(res.data);
       })
       .catch(e => reject(e.response));
@@ -39,7 +39,8 @@ export const me = () => {
   return new Promise((resolve, reject) => {
     req({ url: `${base}/users/me` }, true)
       .then(res => {
-        const { status, data, result } = res || {};
+        const { status, data } = res || {};
+        const { result } = data || {};
         if (status === 200) return resolve(result);
         reject(data);
       })
@@ -51,7 +52,8 @@ export const register = data => {
   return new Promise((resolve, reject) => {
     req({ url: `${base}/users/register`, method: 'post', data })
       .then(res => {
-        const { status, data, result } = res || {};
+        const { status, data } = res || {};
+        const { result } = data || {};
         if (status === 200) return resolve(result);
         reject(data);
       })
@@ -59,9 +61,33 @@ export const register = data => {
   });
 };
 
-export const resetPassword = data => {
+export const verifyEmail = () => {
   return new Promise((resolve, reject) => {
-    req({ url: `${base}/users/reset-password`, method: 'post', data })
+    req({ url: `${base}/users/verify-email`, method: 'post' }, true)
+      .then(res => {
+        const { status, data } = res || {};
+        if (status === 200) return resolve(data || {});
+        reject(data);
+      })
+      .catch(e => reject(e.response));
+  });
+};
+
+export const updatePassword = data => {
+  return new Promise((resolve, reject) => {
+    req({ url: `${base}/users/update-password`, method: 'post', data }, true)
+      .then(res => {
+        const { status, data } = res || {};
+        if (status === 200) return resolve(data || {});
+        reject(data);
+      })
+      .catch(e => reject(e.response));
+  });
+};
+
+export const setNewPassword = data => {
+  return new Promise((resolve, reject) => {
+    req({ url: `${base}/users/set-new-password`, method: 'post', data })
       .then(res => {
         const { status, data } = res || {};
         if (status === 200) return resolve(data || {});

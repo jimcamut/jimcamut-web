@@ -26,7 +26,6 @@ const RecoverPassword = props => {
             flexDirection: 'column'
           }}
         >
-          <h1>Recover Password</h1>
           <RecoverPasswordForm />
           <p>
             <Link to="/login">Log in</Link> if you already have an account

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { setUser } from '../../redux/actions/user';
 import Form from '../Form/Form';
@@ -24,10 +24,9 @@ const RegisterForm = props => {
 
   const onSubmit = e => {
     e.preventDefault();
+    setLoading(true);
     return;
   };
-
-  useEffect(() => {}, []);
 
   const inputProps = {
     update: setFormDataWrapper,

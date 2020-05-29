@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setUser } from '../../redux/actions/user';
-import UpdatePasswordForm from '../../components/SetNewPasswordForm/SetNewPasswordForm';
+import SetNewPasswordForm from '../../components/SetNewPasswordForm/SetNewPasswordForm';
 
-const UpdatePassword = props => {
+const SetNewPassword = () => {
   return (
     <>
       <div
@@ -25,8 +25,7 @@ const UpdatePassword = props => {
             flexDirection: 'column'
           }}
         >
-          <h1>Update Password</h1>
-          <UpdatePasswordForm />
+          <SetNewPasswordForm />
         </div>
       </div>
     </>
@@ -40,4 +39,4 @@ export default connect(
   dispatch => ({
     setUser: data => dispatch(setUser(data))
   })
-)(UpdatePassword);
+)(SetNewPassword);

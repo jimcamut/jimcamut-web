@@ -3,7 +3,7 @@ import React from 'react';
 
 const Button = props => (
   <button
-    className={(props.loading && ' loading') || ''}
+    className={(props.className || '') + (props.loading ? ' loading' : '')}
     disabled={props.loading}
     type={props.isForm ? 'submit' : undefined}
     name={props.isForm ? 'submit' : undefined}

@@ -3,7 +3,9 @@
 // Plugin Imports
 @import '~antd/dist/antd.css';
 
+@import '../vars.scss';
 @import '../colors.scss';
+@import '../antd-overrides.scss';
 
 * {
   box-sizing: border-box;

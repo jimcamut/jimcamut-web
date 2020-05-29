@@ -26,7 +26,12 @@ const Register = props => {
             flexDirection: 'column'
           }}
         >
-          <h1>Register</h1>
+          <h2>Create Your Account</h2>
+          <p>
+            Create a new account if you have a valid pin number. All fields are
+            required.
+          </p>
+
           <RegisterForm />
           <p>
             <Link to="/login">Log in</Link> if you already have an account

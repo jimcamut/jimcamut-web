@@ -1,0 +1,26 @@
+@import '../../assets/scss/colors.scss';
+@import '../../assets/scss/vars.scss';
+
+#header {
+  $left: 80px;
+  position: absolute;
+  display: flex;
+  height: $desktopHeaderHeight;
+  width: calc(100% - #{$left});
+  top: 0;
+  left: $left;
+  background: $app_bg;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba($blue3, 0.2);
+  padding: 0 20px;
+
+  @media (max-width: 600px) {
+    display: none;
+  }
+
+  h1 {
+    color: #fff;
+    font-size: 18px;
+  }
+}

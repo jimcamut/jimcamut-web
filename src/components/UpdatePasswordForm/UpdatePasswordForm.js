@@ -5,7 +5,6 @@ import Form from '../Form/Form';
 import InputGroup from '../Form/InputGroup';
 import { notification } from 'antd';
 import api from '../../api/api';
-import { getURLParamsValue } from '../../utils/utils';
 import { useHistory } from 'react-router-dom';
 
 const defaultFormData = {
@@ -35,12 +34,10 @@ const UpdatePasswordForm = props => {
       });
     }
 
-    const token = getURLParamsValue('token');
-
     setLoading(true);
 
     api.users
-      .resetPassword({ password, token })
+      .updatePassword({ password })
       .then(res => {
         console.log(res);
         setLoading(false);
@@ -62,8 +59,6 @@ const UpdatePasswordForm = props => {
       });
     return;
   };
-
-  useEffect(() => {}, []);
 
   const inputProps = {
     update: setFormDataWrapper,

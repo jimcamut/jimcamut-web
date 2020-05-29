@@ -1,0 +1,12 @@
+@import './colors.scss';
+
+.ant-notification-notice {
+  background-color: $blue3;
+  color: #fff;
+  .ant-notification-notice-message {
+    color: #fff;
+  }
+  svg {
+    fill: $blue1;
+  }
+}

@@ -1,4 +1,4 @@
-@import "../../assets/scss/colors.scss";
+@import '../../assets/scss/colors.scss';
 // https://react-icons.netlify.com/#/search
 
 $preHoverOpacity: 0.5;
@@ -10,7 +10,8 @@ $preHoverOpacity: 0.5;
   display: none;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 0 15px;
 
   // .left,
   // .right {
@@ -21,63 +22,7 @@ $preHoverOpacity: 0.5;
     display: flex;
   }
 
-  // ul.sub-menu {
-  //   li {
-  //     color: #fff;
-  //     text-align: center;
-
-  //     a {
-  //       display: block;
-  //       border-left: 1px solid transparent;
-  //       padding: 20px 0;
-  //       transition: 0.3s ease;
-
-  //       svg {
-  //         transition: 0.3s ease;
-  //       }
-
-  //       &.active {
-  //         border-left-color: $blue3;
-  //       }
-  //       &:hover {
-  //         border-left-color: $blue2;
-  //       }
-  //     }
-
-  //     svg {
-  //       width: 24px;
-  //       height: 24px;
-  //       color: #fff;
-  //       margin-left: -1px;
-  //     }
-  //     a.active svg {
-  //       color: $blue2;
-  //     }
-  //     span {
-  //       display: none;
-  //     }
-
-  //     &:last-child {
-  //       margin-bottom: 0;
-  //     }
-  //   }
-
-  //   .right & {
-  //     li {
-  //       a {
-  //         padding: 12px 0;
-  //         &:hover {
-  //           svg {
-  //             opacity: 1;
-  //           }
-  //         }
-  //       }
-  //       svg {
-  //         width: 16px;
-  //         height: 16px;
-  //         opacity: 0.3;
-  //       }
-  //     }
-  //   }
-  // }
+  .right {
+    height: 100%;
+  }
 }

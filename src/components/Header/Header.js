@@ -1,38 +1,22 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import { updateMeta } from "../../redux/actions/meta";
+import React from 'react';
+import './style.scss';
+import HeaderControls from './HeaderControls';
+import { useLocation } from 'react-router-dom';
+import routeConfig from '../../routes/routeConfig';
 
-const Header = props => {
-  //const [menuOpen, setMenuOpen] = useState(false);
-
-  // const {
-  //   history: { location }
-  // } = props;
-
-  // const isLogin = ["/", "/register", "/login"].includes(location.pathname);
-
-  // const toggleMenu = bool => {
-  //   const val = typeof bool === "boolean" ? bool : !menuOpen;
-  //   setMenuOpen(val);
-  // };
+const Header = () => {
+  let location = useLocation();
+  const path = location.pathname;
+  const config = routeConfig.find(it => it.path === path) || {};
+  const { name, color } = config;
+  const style = color ? { color } : {};
 
   return (
-    <>
-      <div className="main-header">
-        <div className="container">
-          <p>Header</p>
-        </div>
-      </div>
-      {/* <Menu {...props} isOpen={menuOpen} toggle={toggleMenu} /> */}
-    </>
+    <div id="header">
+      {name && <h1 style={style}>{name}</h1>}
+      <HeaderControls />
+    </div>
   );
 };
 
-export default connect(
-  state => ({
-    meta: state.meta
-  }),
-  dispatch => ({
-    updateMeta: data => dispatch(updateMeta(data))
-  })
-)(Header);
+export default Header;

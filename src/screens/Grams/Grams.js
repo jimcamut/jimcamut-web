@@ -53,9 +53,7 @@ const Grams = props => {
   };
 
   useEffect(() => {
-    getGramsFeed({
-      limit: fetchLimit
-    });
+    getGramsFeed({ limit: fetchLimit });
   }, []);
 
   const sources = stateFeed.length

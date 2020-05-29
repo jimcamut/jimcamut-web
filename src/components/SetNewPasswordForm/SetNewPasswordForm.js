@@ -3,17 +3,22 @@ import { connect } from 'react-redux';
 import { setUser } from '../../redux/actions/user';
 import Form from '../Form/Form';
 import InputGroup from '../Form/InputGroup';
-import api from '../../api/api';
 import { notification } from 'antd';
+import api from '../../api/api';
+import { useHistory } from 'react-router-dom';
+import { getURLParamsValue } from '../../utils/utils';
 
 const defaultFormData = {
-  email: '',
-  password: ''
+  password: '',
+  confirmPass: ''
 };
 
-const LoginForm = props => {
+const UpdatePasswordForm = props => {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState(defaultFormData);
+
+  let history = useHistory();
+  const goToLogin = () => history.push('/login');
 
   const setFormDataWrapper = (key, value) => {
     const newFormData = Object.assign({}, formData, { [key]: value });
@@ -22,24 +27,44 @@ const LoginForm = props => {
 
   const onSubmit = e => {
     e.preventDefault();
+    const { password, confirmPass } = formData;
+    const token = getURLParamsValue('token');
 
-    const { email, password } = formData;
-    console.log('SUBMITTING', email, password);
+    if (!token) {
+      return notification.error({
+        message: 'Error',
+        description: 'You do not have a password reset token'
+      });
+    }
+
+    if (password !== confirmPass) {
+      return notification.error({
+        message: 'Error',
+        description: 'Your passwords do not match'
+      });
+    }
+
     setLoading(true);
+
     api.users
-      .login({ email, password })
+      .setNewPassword({ password, token })
       .then(res => {
-        setLoading(false);
-        props.setUser(res);
         console.log(res);
+        setLoading(false);
+        notification.success({
+          message: 'Success!',
+          description: 'Your password was reset'
+        });
+
+        setFormData(defaultFormData);
+        goToLogin();
       })
       .catch(err => {
         console.log(err);
         setLoading(false);
         notification.error({
           message: 'Error',
-          description:
-            (err && err.data && err.data.message) || 'Could not log in'
+          description: (err && err.data && err.data.message) || 'Could submit'
         });
       });
     return;
@@ -52,16 +77,21 @@ const LoginForm = props => {
 
   return (
     <Form
-      className="login-form"
-      submitText="Login"
+      className="change-password-form"
+      submitText="Update"
       onSubmit={onSubmit}
       style={props.style}
       loading={loading}
     >
-      <InputGroup label="Email" formKey="email" type="email" {...inputProps} />
       <InputGroup
         label="Password"
         formKey="password"
+        type="password"
+        {...inputProps}
+      />
+      <InputGroup
+        label="Confirm Password"
+        formKey="confirmPass"
         type="password"
         {...inputProps}
       />
@@ -76,4 +106,4 @@ export default connect(
   dispatch => ({
     setUser: data => dispatch(setUser(data))
   })
-)(LoginForm);
+)(UpdatePasswordForm);
