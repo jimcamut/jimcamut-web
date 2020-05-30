@@ -49,7 +49,6 @@ const RegisterForm = props => {
     api.users
       .register(submitData)
       .then(user => {
-        console.log('USER', user);
         setLoading(false);
         props.setUser(user);
         notification.success({

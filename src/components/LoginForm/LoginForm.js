@@ -24,14 +24,13 @@ const LoginForm = props => {
     e.preventDefault();
 
     const { email, password } = formData;
-    console.log('SUBMITTING', email, password);
+
     setLoading(true);
     api.users
       .login({ email, password })
       .then(res => {
         setLoading(false);
         props.setUser(res);
-        console.log(res);
       })
       .catch(err => {
         console.log(err);

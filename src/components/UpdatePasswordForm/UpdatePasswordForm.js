@@ -39,7 +39,6 @@ const UpdatePasswordForm = props => {
     api.users
       .updatePassword({ password })
       .then(res => {
-        console.log(res);
         setLoading(false);
         notification.success({
           message: 'Success!',

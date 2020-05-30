@@ -25,7 +25,6 @@ const Account = props => {
     api.users
       .verifyEmail()
       .then(res => {
-        console.log(res);
         setRequestingVerify(false);
         notification.success({
           message: 'Success!',

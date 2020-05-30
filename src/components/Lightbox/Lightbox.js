@@ -28,7 +28,6 @@ const Lightbox = ({ sources, index = 0, close, setIndex }) => {
         setIndex(index + 1);
         break;
       case 37:
-        console.log('index', index);
         if (index === 1) break;
         setLoading(true);
         setIndex(index - 1);
