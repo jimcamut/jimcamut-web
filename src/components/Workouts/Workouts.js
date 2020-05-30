@@ -8,7 +8,23 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 
 const tz = 'America/Los_Angeles';
 
-const WeekGraph = ({ week, type = 'Run', toggleWeek, isFirst, isLast }) => {
+const whichHasMore = (run_weeks, bike_weeks) => {
+  const len = (run_weeks || bike_weeks || []).length;
+  const getCount = arr =>
+    (((arr || [])[len - 1] || {}).week_daily || []).filter(it => it).length;
+  const runCount = getCount(run_weeks);
+  const rideCount = getCount(bike_weeks);
+  return runCount >= rideCount ? 'Run' : 'Ride';
+};
+
+const WeekGraph = ({
+  week,
+  type = 'Run',
+  toggleWeek,
+  isFirst,
+  isLast,
+  toggleActivity
+}) => {
   if (!week) return null;
   const { week_start, week_miles, week_seconds = 0, week_daily } = week || {};
   const weekSet = week_daily || [null, null, null, null, null, null, null];
@@ -48,6 +64,7 @@ const WeekGraph = ({ week, type = 'Run', toggleWeek, isFirst, isLast }) => {
       topExtra={
         <StatContainer
           type={type}
+          toggleActivity={toggleActivity}
           miles={week_miles}
           duration={duration}
           pace={pace}
@@ -76,10 +93,13 @@ const WeekGraph = ({ week, type = 'Run', toggleWeek, isFirst, isLast }) => {
 };
 
 const Workouts = memo(({ run_weeks, bike_weeks }) => {
-  if (!run_weeks) return null;
-  const len = (run_weeks || []).length;
+  if (!(run_weeks || bike_weeks)) return null;
+  const defaultType = whichHasMore(run_weeks, bike_weeks);
+  const [activityType, setActivityType] = useState(defaultType);
+  const set = activityType === 'Run' ? run_weeks : bike_weeks;
+  const len = (set || []).length;
   const [weekIdx, setWeekIdx] = useState(len - 1);
-  const set = run_weeks;
+
   const week = set[weekIdx];
 
   if (!week) return null;
@@ -90,13 +110,18 @@ const Workouts = memo(({ run_weeks, bike_weeks }) => {
     setWeekIdx(newIdx);
   };
 
+  const toggleActivity = () =>
+    setActivityType(activityType === 'Run' ? 'Ride' : 'Run');
+
   return (
     <WeekGraph
       week={week}
       toggleWeek={toggleWeek}
+      toggleActivity={toggleActivity}
       weekIdx={weekIdx}
       isFirst={weekIdx === 0}
       isLast={weekIdx === len - 1}
+      type={activityType}
     />
   );
 });

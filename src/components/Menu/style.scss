@@ -1,7 +1,7 @@
-@import "../../assets/scss/colors.scss";
+@import '../../assets/scss/colors.scss';
 // https://react-icons.netlify.com/#/search
 
-$preHoverOpacity: 0.5;
+$preHoverOpacity: 0.35;
 
 .menu {
   background: $app_bg_dark;
@@ -31,11 +31,12 @@ $preHoverOpacity: 0.5;
 
     .top {
       display: flex;
-      flex: 1;
+      flex: 1 1;
+      height: 100%;
       ul.sub-menu {
         margin: 0 auto;
         display: flex;
-        flex: 1;
+        flex: 1 1;
         li {
           display: inline-block;
           display: flex;
@@ -45,6 +46,13 @@ $preHoverOpacity: 0.5;
 
           a {
             border-left: none;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex: 1 1;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
           }
         }
       }
@@ -57,6 +65,10 @@ $preHoverOpacity: 0.5;
   display: block;
   width: 44px;
   height: 44px;
+
+  @media (max-width: 600px) {
+    transform: translate(0, 5px);
+  }
 }
 
 ul.sub-menu {
@@ -67,19 +79,24 @@ ul.sub-menu {
 
     a {
       display: block;
-      border-left: 1px solid transparent;
       padding: 20px 0;
       transition: 0.3s ease;
+      border-left: 1px solid transparent;
+
+      @media (max-width: 600px) {
+        border-left: none;
+        border-top: 1px solid transparent;
+      }
 
       svg {
         transition: 0.3s ease;
       }
 
       &.active {
-        border-left-color: $blue3;
+        border-color: $blue3;
       }
       &:hover {
-        border-left-color: $blue2;
+        border-color: $blue2;
       }
     }
 
@@ -87,12 +104,12 @@ ul.sub-menu {
       a {
         &.active,
         &:hover {
-          border-left-color: $blue2;
+          border-color: $blue2;
           svg {
             color: $blue2;
           }
         }
-        border-left-color: rgba($blue2, $preHoverOpacity);
+        border-color: rgba($blue2, $preHoverOpacity);
       }
     }
 
@@ -100,36 +117,36 @@ ul.sub-menu {
       a {
         &.active,
         &:hover {
-          border-left-color: $stravaOrange;
+          border-color: $stravaOrange;
           svg {
             color: $stravaOrange;
           }
         }
-        border-left-color: rgba($stravaOrange, $preHoverOpacity);
+        border-color: rgba($stravaOrange, $preHoverOpacity);
       }
     }
     &.grams {
       a {
         &.active,
         &:hover {
-          border-left-color: $instaPurple;
+          border-color: $instaPurple;
           svg {
             fill: url(#rg);
           }
         }
-        border-left-color: rgba($instaPurple, $preHoverOpacity);
+        border-color: rgba($instaPurple, $preHoverOpacity);
       }
     }
     &.tweets {
       a {
         &.active,
         &:hover {
-          border-left-color: $twitterBlue;
+          border-color: $twitterBlue;
           svg {
             color: $twitterBlue;
           }
         }
-        border-left-color: rgba($twitterBlue, $preHoverOpacity);
+        border-color: rgba($twitterBlue, $preHoverOpacity);
       }
     }
 
@@ -137,7 +154,7 @@ ul.sub-menu {
       width: 24px;
       height: 24px;
       color: #fff;
-      margin-left: -1px;
+      // margin-left: -1px;
     }
     a.active svg {
       color: $blue2;
@@ -165,6 +182,65 @@ ul.sub-menu {
         width: 16px;
         height: 16px;
         opacity: 0.3;
+      }
+      a.active svg {
+        opacity: 1;
+      }
+    }
+  }
+
+  @media (min-width: 601px) {
+    .header-controls {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .mobile-header {
+    ul.sub-menu {
+      display: flex;
+      margin: 0;
+      height: 100%;
+
+      li {
+        color: #fff;
+        text-align: center;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &.header-controls {
+          margin-left: 10px;
+        }
+
+        a {
+          display: block;
+          border-bottom: 1px solid transparent;
+          border-left: none;
+          border-top: none;
+
+          padding: 0 15px;
+          transition: 0.3s ease;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          svg {
+            width: 16px;
+            height: 16px;
+            transition: 0.3s ease;
+          }
+
+          &.active {
+            border-bottom-color: $blue3;
+          }
+          &:hover {
+            border-bottom-color: $blue2;
+          }
+        }
       }
     }
   }

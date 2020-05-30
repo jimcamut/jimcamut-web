@@ -28,7 +28,6 @@ const Lightbox = ({ sources, index = 0, close, setIndex }) => {
         setIndex(index + 1);
         break;
       case 37:
-        console.log('index', index);
         if (index === 1) break;
         setLoading(true);
         setIndex(index - 1);
@@ -61,7 +60,7 @@ const Lightbox = ({ sources, index = 0, close, setIndex }) => {
   if (!(sources && sources.length && sources[index - 1])) return null;
 
   return (
-    <div className={`lightbox${src ? ' ' + 'active' : ''}`}>
+    <div className={`lightbox${src ? ' active' : ''}`}>
       <div className="backdrop" onClick={closeWrapper}></div>
       {loading && !isVideo && <Loader />}
       {src && !isVideo && (

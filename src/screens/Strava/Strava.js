@@ -1,6 +1,6 @@
 import React, { useState, useEffect, memo } from 'react';
 import './style.scss';
-import { fetchStrava } from '../../api/api';
+import api from '../../api/api';
 import { connect } from 'react-redux';
 import { setStrava } from '../../redux/actions/strava';
 import StravaCard from '../../components/StravaCard/StravaCard';
@@ -30,7 +30,8 @@ const Strava = props => {
     };
 
     setLoadingFeed(true);
-    fetchStrava(opts)
+    api.strava
+      .fetchStrava(opts)
       .then(feed => {
         let newData;
         if (feed.length) {

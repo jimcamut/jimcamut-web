@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './style.scss';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { fetchTweets } from '../../api/api';
+import api from '../../api/api';
 import _ from 'lodash';
 import Loader from '../../components/Loader/Loader';
 import TwitterCard from '../../components/TwitterCard/TwitterCard';
@@ -30,7 +30,8 @@ let Tweets = props => {
     };
 
     setLoadingFeed(true);
-    fetchTweets(opts)
+    api.tweets
+      .fetchTweets(opts)
       .then(feed => {
         let newData;
         if (feed.length) {

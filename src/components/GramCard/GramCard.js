@@ -17,8 +17,8 @@ const GramCard = ({ id, media_url, media_type, public_urls, onClick }) => {
         <img src={src} alt={`ig-${id}`} />
       )}
       {media_type === 'VIDEO' && (
-        <video alt={`ig-${id}`} controls>
-          <source src={src} type="video/mp4" />
+        <video alt={`ig-${id}`} preload="metadata" controls>
+          <source src={src + '#t=0.1'} type="video/mp4" />
         </video>
       )}
     </div>

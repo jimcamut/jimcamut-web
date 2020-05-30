@@ -16,3 +16,8 @@ export const getURLParams = () => {
     return [];
   }
 };
+
+export const getURLParamsValue = key => {
+  const urlParams = getURLParams() || [];
+  return ((urlParams || []).find(it => it && it.key === key) || {}).value;
+};

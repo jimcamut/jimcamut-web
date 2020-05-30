@@ -8,21 +8,73 @@
   flex-direction: column;
   color: #fff;
 
+  @media (min-width: 801px) {
+    .ant-tabs {
+      height: 100%;
+    }
+    .ant-tabs .ant-tabs-left-content {
+      height: 100%;
+      overflow: auto;
+    }
+  }
+
   .container {
+    padding: 30px 20px;
     position: relative;
     display: block;
     width: 100%;
     margin: 0 auto;
     overflow: auto;
-    padding: 40px 30px;
+
+    height: 100%;
+    @media (min-width: 801px) {
+      padding: 80px 30px 30px;
+      overflow-y: scroll;
+      box-sizing: content-box;
+    }
   }
 
   .inner {
     position: relative;
     display: block;
     width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
+    // max-width: 600px;
+    // margin: 0 auto;
+    color: #fff;
+
+    @media (max-width: 600px) {
+      .table-of-contents {
+        margin-top: 30px;
+      }
+
+      .content {
+        margin-top: 30px;
+      }
+    }
+
+    @media (min-width: 801px) {
+      max-width: 900px;
+      padding: 0;
+      display: flex;
+      flex: 1 1;
+      flex-direction: row-reverse;
+
+      .table-of-contents {
+        width: 350px;
+        margin-left: 30px;
+
+        ol {
+          margin-left: 0;
+          padding-left: 2em;
+          font-size: 13px;
+        }
+      }
+
+      .content {
+        margin-left: 60px;
+        width: 100%;
+      }
+    }
   }
 
   h1,
@@ -42,7 +94,7 @@
 
   .section {
     display: block;
-    margin: 60px auto;
+    margin: 0 auto 60px;
   }
 }
 
@@ -53,13 +105,16 @@
   flex-wrap: wrap;
   justify-content: space-between;
 
-  a {
+  a,
+  div {
     width: 32%;
     height: 0;
     padding-bottom: 32%;
     overflow: hidden;
     margin-bottom: 10px;
     transition: 0.2s ease;
+    cursor: pointer;
+
     &:hover {
       opacity: 0.2;
     }

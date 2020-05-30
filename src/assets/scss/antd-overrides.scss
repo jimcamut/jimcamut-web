@@ -1,0 +1,45 @@
+@import './colors.scss';
+
+[class^='ant-'] {
+  font-size: inherit;
+  font-family: inherit;
+  color: inherit;
+  font-variant: inherit;
+}
+
+.ant-notification-notice {
+  background-color: $blue3;
+  color: #fff;
+  .ant-notification-notice-message {
+    color: #fff;
+  }
+  svg {
+    fill: $blue1;
+  }
+}
+
+.ant-tabs .ant-tabs-left-bar .ant-tabs-tab,
+.ant-tabs .ant-tabs-right-bar .ant-tabs-tab {
+  margin-bottom: 0;
+}
+.ant-tabs .ant-tabs-left-content {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.ant-tabs-bar {
+  border: none !important;
+}
+
+.ant-tabs-ink-bar {
+  background-color: $blue2;
+}
+
+.ant-tabs-nav {
+  .ant-tabs-tab {
+    color: #fff;
+  }
+  .ant-tabs-tab:hover,
+  .ant-tabs-tab-active {
+    color: $blue2;
+  }
+}
