@@ -1,4 +1,4 @@
-@import "../../assets/scss/colors.scss";
+@import '../../assets/scss/colors.scss';
 
 $light_bg: lighten($app_bg, 2%);
 $dark_bg: darken($app_bg, 2%);
@@ -50,6 +50,8 @@ $dark_bg: darken($app_bg, 2%);
     }
     .title {
       margin-bottom: 5px;
+      color: #fff;
+      font-weight: 700;
     }
   }
 

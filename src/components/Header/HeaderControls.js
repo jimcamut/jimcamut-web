@@ -33,7 +33,7 @@ const HeaderControls = props => {
           text="Log Out"
         />
       ) : (
-        <Link to="/login">Login</Link>
+        <span />
       )}
     </>
   );

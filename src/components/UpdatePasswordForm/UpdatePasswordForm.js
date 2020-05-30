@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { setUser } from '../../redux/actions/user';
 import Form from '../Form/Form';
@@ -77,12 +77,14 @@ const UpdatePasswordForm = props => {
         label="Password"
         formKey="password"
         type="password"
+        isPassword
         {...inputProps}
       />
       <InputGroup
         label="Confirm Password"
         formKey="confirmPass"
         type="password"
+        isPassword
         {...inputProps}
       />
     </Form>

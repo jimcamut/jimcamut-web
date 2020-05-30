@@ -21,29 +21,25 @@ const routeConfig = [
     name: 'About Me',
     component: About,
     exact: true,
-    path: '/about',
-    color: '#0084ff'
+    path: '/about'
   },
   {
     name: 'Strava Activities',
     component: Strava,
     exact: true,
-    path: '/strava',
-    color: '#fc5200'
+    path: '/strava'
   },
   {
     name: 'My Grams',
     component: Grams,
     exact: true,
-    path: '/grams',
-    color: '#d6249f'
+    path: '/grams'
   },
   {
     name: 'My Tweets',
     component: Tweets,
     exact: true,
-    path: '/tweets',
-    color: '#00aced'
+    path: '/tweets'
   },
   {
     name: 'Log in to Your Account',

@@ -62,7 +62,7 @@ const Account = props => {
                 className="small"
                 loading={requestingVerify}
                 onClick={requestEmailVerification}
-                text="Verify Email"
+                text="Resent Verify Email Link"
               />
             )}
             <p>

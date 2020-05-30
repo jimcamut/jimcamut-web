@@ -87,12 +87,14 @@ const UpdatePasswordForm = props => {
         label="Password"
         formKey="password"
         type="password"
+        isPassword
         {...inputProps}
       />
       <InputGroup
         label="Confirm Password"
         formKey="confirmPass"
         type="password"
+        isPassword
         {...inputProps}
       />
     </Form>

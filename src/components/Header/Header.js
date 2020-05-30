@@ -8,12 +8,12 @@ const Header = () => {
   let location = useLocation();
   const path = location.pathname;
   const config = routeConfig.find(it => it.path === path) || {};
-  const { name, color } = config;
-  const style = color ? { color } : {};
+  const { name } = config;
 
   return (
     <div id="header">
-      {name && <h1 style={style}>{name}</h1>}
+      <span></span>
+      {name && <h1>{name}</h1>}
       <HeaderControls />
     </div>
   );

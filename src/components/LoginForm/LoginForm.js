@@ -63,6 +63,7 @@ const LoginForm = props => {
         label="Password"
         formKey="password"
         type="password"
+        isPassword
         {...inputProps}
       />
     </Form>

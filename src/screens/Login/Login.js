@@ -4,6 +4,7 @@ import api from '../../api/api';
 import { setUser } from '../../redux/actions/user';
 import LoginForm from '../../components/LoginForm/LoginForm';
 import { Link } from 'react-router-dom';
+import FormPage from '../../components/FormPage/FormPage';
 
 const Login = props => {
   useEffect(() => {
@@ -13,36 +14,15 @@ const Login = props => {
   }, [props]);
 
   return (
-    <>
-      <div
-        className="page-login"
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          flex: '1 1',
-          flexDirection: 'row',
-          justifyContent: 'center'
-        }}
-      >
-        <div
-          className="center-container"
-          style={{
-            display: 'flex',
-            width: '100%',
-            maxWidth: 400,
-            flexDirection: 'column'
-          }}
-        >
-          <LoginForm />
-          <p>
-            <Link to="/register">Register</Link> if you've been given a pin
-          </p>
-          <p>
-            <Link to="/recover-password">Lost password?</Link>
-          </p>
-        </div>
-      </div>
-    </>
+    <FormPage>
+      <LoginForm />
+      <p>
+        <Link to="/register">Register</Link> if you've been given a pin
+      </p>
+      <p>
+        <Link to="/recover-password">Lost password?</Link>
+      </p>
+    </FormPage>
   );
 };
 
