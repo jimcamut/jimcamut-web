@@ -46,8 +46,8 @@
     "prettier:ci": "prettier --list-different src/**/*.js  __tests__/**/*.js",
     "lint": "eslint src/**/*.js __tests__/**/*.js",
     "deploy": "aws --profile jimcamut s3  sync build/ s3://jimcamut.com --acl public-read",
-    "invalidate": "aws --profile jimcamut cloudfront create-invalidation --distribution-id EQXL0A5FXRQL0 --paths '/*'",
-    "buildAndDeploy": "(yarn build) && (yarn deploy) && (yarn invalidate)"
+    "invalidate": "sh private-scripts/invalidateCache.sh",
+    "buildAndDeploy": "yarn build && yarn deploy && yarn invalidate"
   },
   "eslintConfig": {
     "extends": "react-app"
