@@ -53,6 +53,14 @@ a > * {
     font-size: 13px;
     line-height: 1.6;
   }
+
+  ul {
+    margin-left: 2em;
+    li {
+      list-style-type: disc;
+      margin-bottom: 0.75em;
+    }
+  }
 }
 
 h1,

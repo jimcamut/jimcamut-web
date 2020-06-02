@@ -21,7 +21,10 @@
 .ant-tabs .ant-tabs-left-bar .ant-tabs-tab,
 .ant-tabs .ant-tabs-right-bar .ant-tabs-tab {
   margin-bottom: 0;
+  text-align: right;
+  padding-right: 20px;
 }
+
 .ant-tabs .ant-tabs-left-content {
   border-color: rgba(255, 255, 255, 0.2);
 }

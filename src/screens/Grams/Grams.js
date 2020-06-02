@@ -8,6 +8,7 @@ import GramCard from '../../components/GramCard/GramCard';
 import Lightbox from '../../components/Lightbox/Lightbox';
 import { setGrams } from '../../redux/actions/grams';
 import { connect } from 'react-redux';
+import { dataNeedsReset } from '../../utils/utils';
 
 const sorter = (a, b) =>
   new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
@@ -37,7 +38,11 @@ const Grams = props => {
       .then(feed => {
         let newData;
         if (feed.length) {
-          newData = _.uniqBy(stateFeed.concat(feed), 'id').sort(sorter);
+          if (opts.reset) {
+            newData = _.uniqBy(feed, 'id').sort(sorter);
+          } else {
+            newData = _.uniqBy(stateFeed.concat(feed), 'id').sort(sorter);
+          }
           props.setGrams(newData.slice(0, fetchLimit), 'id');
         }
         setStateFeed(newData);
@@ -53,8 +58,9 @@ const Grams = props => {
   };
 
   useEffect(() => {
-    getGramsFeed({ limit: fetchLimit });
-  }, []);
+    const reset = dataNeedsReset(props.grams, 1);
+    getGramsFeed({ limit: fetchLimit, reset });
+  }, [props]);
 
   const sources = stateFeed.length
     ? stateFeed.map(it =>

@@ -7,6 +7,7 @@ import StravaCard from '../../components/StravaCard/StravaCard';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import _ from 'lodash';
 import Loader from '../../components/Loader/Loader';
+import { dataNeedsReset } from '../../utils/utils';
 
 const fetchLimit = 10;
 const sorter = (a, b) => new Date(b.start_date) - new Date(a.start_date);
@@ -35,7 +36,12 @@ const Strava = props => {
       .then(feed => {
         let newData;
         if (feed.length) {
-          newData = _.uniqBy(stateFeed.concat(feed), 'id').sort(sorter);
+          // START NEW
+          if (opts.reset) {
+            newData = _.uniqBy(feed, 'id').sort(sorter);
+          } else {
+            newData = _.uniqBy(stateFeed.concat(feed), 'id').sort(sorter);
+          }
           //props.setFeed(_.uniqBy(newData.slice(0, 10), "id"));
         }
         props.setStrava(_.uniqBy(newData.slice(0, fetchLimit), 'id'));
@@ -51,11 +57,13 @@ const Strava = props => {
   };
 
   useEffect(() => {
+    const reset = dataNeedsReset(props.strava, 1);
     getStravaFeed({
       limit: fetchLimit,
-      after: new Date().toISOString()
+      after: new Date().toISOString(),
+      reset
     });
-  }, []);
+  }, [props]);
 
   return (
     <div className="page-strava">

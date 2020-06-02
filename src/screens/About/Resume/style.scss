@@ -1,0 +1,46 @@
+.resume .content {
+  h2,
+  h3,
+  h4 {
+    color: #fff;
+  }
+
+  h2,
+  h4 {
+    font-style: italic;
+  }
+
+  h2 {
+    text-transform: uppercase;
+  }
+
+  h3 {
+    font-weight: 800;
+    margin-bottom: 0;
+  }
+
+  p,
+  ul {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    opacity: 0.6;
+    line-height: 1.5;
+  }
+
+  .topic-section {
+    margin-bottom: 30px;
+  }
+
+  .job-section {
+    margin-top: 30px;
+    padding-left: 15px;
+  }
+
+  .header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+}
