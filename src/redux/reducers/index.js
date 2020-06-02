@@ -6,6 +6,7 @@ import StravaReducer from './strava';
 import TweetsReducer from './tweets';
 import DashReducer from './dash';
 import GramsReducer from './grams';
+import ResumeReducer from './resume';
 
 const AppReducer = combineReducers({
   user: User,
@@ -13,7 +14,8 @@ const AppReducer = combineReducers({
   strava: StravaReducer,
   tweets: TweetsReducer,
   dash: DashReducer,
-  grams: GramsReducer
+  grams: GramsReducer,
+  resume: ResumeReducer
 });
 
 const RootReducer = (state, action) => {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './style.scss';
 import { Tabs } from 'antd';
 import AboutMe from './AboutMe';
-import Resume from './Resume';
+import Resume from './Resume/Resume';
 
 const { TabPane } = Tabs;
 

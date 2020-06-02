@@ -21,3 +21,15 @@ export const getURLParamsValue = key => {
   const urlParams = getURLParams() || [];
   return ((urlParams || []).find(it => it && it.key === key) || {}).value;
 };
+
+export const dataNeedsReset = (data, daysAgo) => {
+  const now = new Date();
+  const hasRecentData =
+    data.data &&
+    data.data.length &&
+    data.fetched &&
+    new Date(data.fetched).getTime() >
+      new Date(now).setDate(now.getDate() - daysAgo);
+
+  return !hasRecentData;
+};

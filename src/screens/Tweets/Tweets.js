@@ -7,6 +7,7 @@ import Loader from '../../components/Loader/Loader';
 import TwitterCard from '../../components/TwitterCard/TwitterCard';
 import { connect } from 'react-redux';
 import { setTweets } from '../../redux/actions/tweets';
+import { dataNeedsReset } from '../../utils/utils';
 
 const sorter = (a, b) => new Date(b.created_at) - new Date(a.created_at);
 const fetchLimit = 20;
@@ -35,7 +36,11 @@ let Tweets = props => {
       .then(feed => {
         let newData;
         if (feed.length) {
-          newData = _.uniqBy(stateFeed.concat(feed), 'id').sort(sorter);
+          if (opts.reset) {
+            newData = _.uniqBy(feed, 'id').sort(sorter);
+          } else {
+            newData = _.uniqBy(stateFeed.concat(feed), 'id').sort(sorter);
+          }
         }
         props.setTweets(_.uniqBy(newData.slice(0, fetchLimit), 'id'));
         setStateFeed(newData);
@@ -52,8 +57,9 @@ let Tweets = props => {
   };
 
   useEffect(() => {
-    getTweetsFeed({ limit: fetchLimit });
-  }, []);
+    const reset = dataNeedsReset(props.tweets, 1);
+    getTweetsFeed({ limit: fetchLimit, reset });
+  }, [props]);
 
   return (
     <div className="page-tweets">

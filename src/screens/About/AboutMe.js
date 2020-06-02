@@ -13,12 +13,14 @@ const AboutMe = () => {
 
   const cyclingThumbnails = Array.from(Array(21).keys()).map(
     n =>
-      `https://d1i3ck8kwx4jf7.cloudfront.net/website/cycling/cycling${n +
+      `https://d1i3ck8kwx4jf7.cloudfront.net/public/website/cycling/cycling${n +
         1}.jpg`
   );
 
   const bodieThumbnails = Array.from(Array(9).keys()).map(
-    n => `https://d1i3ck8kwx4jf7.cloudfront.net/website/bodie/bodie${n + 1}.jpg`
+    n =>
+      `https://d1i3ck8kwx4jf7.cloudfront.net/public/website/bodie/bodie${n +
+        1}.jpg`
   );
 
   const showCyclingImage = url => {
