@@ -1,5 +1,6 @@
 import React from 'react';
 import './style.scss';
+import moment from 'moment';
 
 const ReplaceLinks = ({ str }) => {
   const linkRegExp = /(\(.*\)\[.*\])/gi;
@@ -18,8 +19,18 @@ const ReplaceLinks = ({ str }) => {
   return <li>{parts}</li>;
 };
 
-const ResumeBody = ({ sections }) => (
+const ResumeBody = ({ sections, updated }) => (
   <div className="resume-body">
+    <div className="meta">
+      <p>
+        For a PDF version of my resume, please{' '}
+        <a href="mailto:jim@jimcamut.com?subject=Resume&body=Hi Jim, I would like a copy of your resume.">
+          email me
+        </a>
+        .
+      </p>
+    </div>
+
     {sections.map((section, i) => (
       <section className="topic-section" key={i}>
         <h2>{section.title}</h2>

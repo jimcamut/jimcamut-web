@@ -53,7 +53,7 @@ const Resume = props => {
     loadResume();
   }, []);
 
-  const { sections } = props.resume.data || {};
+  const { sections, updated } = props.resume.data || {};
 
   return (
     <div className="inner resume">
@@ -61,7 +61,9 @@ const Resume = props => {
       <div className="content">
         <div className="section">
           {loading && <Loader />}
-          {!loading && sections && <ResumeBody sections={sections} />}
+          {!loading && sections && (
+            <ResumeBody sections={sections} updated={updated} />
+          )}
           {!loading && errored && (
             <Button loading={loading} onClick={loadResume} text="Try Again" />
           )}
