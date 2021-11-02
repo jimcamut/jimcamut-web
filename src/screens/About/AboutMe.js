@@ -23,15 +23,16 @@ const AboutMe = () => {
         1}.jpg`
   );
 
-  const showCyclingImage = url => {
-    const idx = cyclingThumbnails.findIndex(it => it === url);
-    if (idx > -1) setCyclingLighboxIdx(idx + 1);
+  const setLBX = (url, arr, func) => {
+    const idx = arr.findIndex(it => it === url);
+    if (idx > -1) func(idx + 1);
   };
 
-  const showBodieImage = url => {
-    const idx = bodieThumbnails.findIndex(it => it === url);
-    if (idx > -1) setBodieLighboxIdx(idx + 1);
-  };
+  const showCyclingImage = url =>
+    setLBX(url, cyclingThumbnails, setCyclingLighboxIdx);
+
+  const showBodieImage = url =>
+    setLBX(url, bodieThumbnails, setBodieLighboxIdx);
 
   return (
     <>
@@ -39,54 +40,105 @@ const AboutMe = () => {
         <div className="table-of-contents"></div>
         <div className="content">
           <div className="section">
-            <h2>TL:DR;</h2>
-
+            <h2>About</h2>
             <p>
-              I live in San Francisco with my amazing wife Amanda and our
-              totally bonkers Border Collie, Bodie (shameless dog pictures to
-              follow).
+              Jim Camut is an entrepreneur, startup CTO, and full-stack software
+              engineer who designed, engineered and{' '}
+              <a
+                target="_blank"
+                rel="noreferrer noopener"
+                href="https://barklypets.com"
+              >
+                co-founded
+              </a>{' '}
+              one of the country’s first marketplace apps for pet care. He has
+              worked across several industries including identity management,
+              health technology, pet care technology and database analytics. He
+              maintains a passion for bootstrapping new products and
+              technologies and getting them to market at lightning speed. 
             </p>
 
             <p>
-              I work in tech now, but racing bikes was a huge part of my earlier
-              life. I raced in Europe and all over North America.
+              With a decade of experience working across product, marketing and
+              engineering teams - Jim brings cohesion and wholistic thinking
+              between them. His expertise is in maturing technologies and the
+              teams that build them, but his biggest passion is still writing
+              code.
             </p>
 
             <p>
-              I graduated from Penn State University with a bachelors degree in
-              Public Relations, but I eventually taught myself how to code and
-              decided that I really liked it. Fast forward to 2015 and I
-              cofounded a pet care app called Barkly Pets. I'm still at Barkly
-              Pets building our architecture and working with a great crew of
-              people.
+              After building the technology for his startup of which he was a
+              cofounder, Jim is now an advisor to several other startups. He
+              advises in go-to-market strategies, analyzing and architecting
+              tech solutions and helping to scale technologies.
+            </p>
+            <p>
+              Outside of work, Jim is an avid cyclist and runner and loves
+              enjoying the outdoors with his wife and growing family in the Bay
+              Area.
             </p>
           </div>
 
           <div className="section">
             <h2>This Website</h2>
             <p>
-              I built this website from scratch, because I'm "good at the
-              computers" as someone's grandma once said. If you want to look
-              under the hood,{' '}
+              I built this website to pull in some dynamic feeds (Strava,
+              Twitter and Instragram) to keep it fresh. There's not anything
+              super sophisitcated happening, but if you want to look under the
+              hood,{' '}
               <a
                 href="http://github.com/jimcamut/jimcamut-web"
                 target="_blank"
                 rel="noreferrer noopener"
               >
                 here is the repo
-              </a>
-              . I've built my own backend API on Node/Express and PostgreSQL,
-              but I'll keep that repo private since it handles user accounts and
-              session tokens.
+              </a>{' '}
+              for the front end. The backend uses Node/Express and PostgreSQL to
+              integrate with the social APIs, and to archive my own data.
             </p>
           </div>
+
           <div className="section">
-            <h2>My Dog - As Promised :)</h2>
+            <h2>Current Projects</h2>
             <p>
-              If you know me, you know that I proudly wear my "World's Best
-              Border Collie Dad" t-shirt all the time. My wife and I are crazy
-              dog pareents. Eithout futher, adieu, here are some pictures of
-              Bodie.
+              I'm currently working on a personal project to supercharge the
+              Gmail experience called{' '}
+              <a
+                href="https://www.nboxer.com"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                nboxer
+              </a>
+              , and I also currently use it as email client. This app integrates
+              with your Gmail account and enhances it with a number of
+              productivity features like todo lists attached to emails,
+              auto-saving attachments outside of Gmail, and auto-curating emails
+              that need your reply. Right now the project is in private beta and
+              Google will need to conduct a $10-75k audit to approve it for
+              public use beyond 100 users. If you're interested in getting
+              access or even helping to fund the audit, please contact me at{' '}
+              <span
+                className="email"
+                data-user="jim"
+                data-domain="jimcamut.com"
+              />{' '}
+              or visit the website and get your name on the waitlist.
+            </p>
+            <p>
+              <img
+                src={require('../../assets/img/nboxer-action.gif')}
+                style={{ width: '100%' }}
+                alt="nboxer animation"
+              />
+            </p>
+          </div>
+
+          <div className="section">
+            <h2>Bodie</h2>
+            <p>
+              If you build your own website, you can reserve a section for your
+              dog. This is Bodie and he's the best.
             </p>
 
             <div className="gallery square">
@@ -101,18 +153,19 @@ const AboutMe = () => {
           <div className="section">
             <h2>Cycling</h2>
             <p>
-              As I mentioned before, I used to race bikes all over. Here is my{' '}
+              I used to race bikes in Europe and all over North America. Here is
+              my{' '}
               <a
                 target="_blank"
                 rel="noreferrer noopener"
                 href="https://www.cyclingnews.com/author/jim-camut/"
               >
                 blog on CyclingNews.com
-              </a>{' '}
-              from when I raced in Europe.
+              </a>
+              , and here are a few photos from back in the day:
             </p>
 
-            <p>And here are a few photos from back in the day:</p>
+            <p></p>
             <div className="gallery square">
               {cyclingThumbnails.map(url => (
                 <div key={url} onClick={() => showCyclingImage(url)}>

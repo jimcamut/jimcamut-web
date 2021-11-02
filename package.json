@@ -48,7 +48,7 @@
     "uploadAssets": "sh private-scripts/uploadAssets.sh",
     "deploy": "aws --profile jimcamut s3 sync build/ s3://jimcamut.com --acl public-read",
     "invalidate": "sh private-scripts/invalidateCache.sh",
-    "buildAndDeploy": "yarn build && yarn deploy && yarn invalidate"
+    "buildAndDeploy": "yarn uploadAssets && yarn build && yarn deploy && yarn invalidate"
   },
   "eslintConfig": {
     "extends": "react-app"
