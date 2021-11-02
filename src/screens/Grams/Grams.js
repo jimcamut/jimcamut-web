@@ -28,7 +28,8 @@ const Grams = props => {
     opts = opts || {
       limit: fetchLimit,
       after:
-        (stateFeed.length && stateFeed[stateFeed.length - 1].timestamp) ||
+        ((stateFeed || []).length &&
+          stateFeed[stateFeed.length - 1].timestamp) ||
         undefined
     };
 
@@ -45,7 +46,9 @@ const Grams = props => {
           }
           props.setGrams(newData.slice(0, fetchLimit), 'id');
         }
-        setStateFeed(newData);
+        if (newData && newData.length) {
+          setStateFeed(newData);
+        }
         setLoadingFeed(false);
 
         if (feed.length < (opts.limit || fetchLimit)) {
@@ -62,7 +65,7 @@ const Grams = props => {
     getGramsFeed({ limit: fetchLimit, reset });
   }, [props]);
 
-  const sources = stateFeed.length
+  const sources = (stateFeed || []).length
     ? stateFeed.map(it =>
         (it.public_urls || []).find(
           u => u && u.match(/original.jpg$|video.mp4$/)
@@ -79,7 +82,7 @@ const Grams = props => {
           style={{ height: '100%', width: '100%', overflow: 'scroll' }}
         >
           <InfiniteScroll
-            dataLength={stateFeed.length}
+            dataLength={(stateFeed || []).length}
             next={() => getGramsFeed()}
             hasMore={hasMore}
             loading={loadingFeed}
@@ -87,7 +90,7 @@ const Grams = props => {
             loader={<Loader />}
           >
             <div className="image-grid">
-              {stateFeed.length > 0 &&
+              {(stateFeed || []).length > 0 &&
                 stateFeed.map((data, idx) => (
                   <GramCard
                     {...data}

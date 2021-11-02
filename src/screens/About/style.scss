@@ -128,3 +128,11 @@
     }
   }
 }
+
+span.email::before {
+  content: attr(data-user) '@';
+}
+
+span.email::after {
+  content: attr(data-domain);
+}
