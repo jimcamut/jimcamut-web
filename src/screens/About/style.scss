@@ -8,6 +8,10 @@
   flex-direction: column;
   color: #fff;
 
+  [class*='ant-tabs-content-holder'] {
+    overflow: auto;
+  }
+
   @media (min-width: 801px) {
     .content {
       padding-right: 30px;
